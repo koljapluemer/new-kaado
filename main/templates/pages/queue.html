@@ -47,56 +47,72 @@
       <p class="border-t border-base-300 mt-4 pt-4">
         {{ card.back|markdownify }}
       </p>
-
       {% endif %}
+      <div id="stats">
+        {% for log in card.log_set.all %}
+        {% if log.score > 0 %}
+        <div class="badge badge-success"></div>
+        {% elif log.score < 0 %}
+        <div class="badge badge-error"></div>
+        {% else %}
+        <div class="badge badge-warning"></div>
+        {% endif %}
+        {% endfor %}
+        </div>
+      </div>
     </div>
+
+    <form class="flex gap-4 justify-center mt-4" action="/" method="POST">
+      <input type="hidden" name="card-id" value="{{ card.id }}">
+      {% csrf_token %}
+      {% if card.human_readable_type == 'Habit'%}
+      <button type="submit" href="/" class="btn bg-red-400 text-slate-800" value="" name="not-today">Not Today</button>
+      <button type="submit" href="/" class="btn bg-yellow-400 text-slate-800" value="" name="do-later">Do Later</button>
+      <button type="submit" href="/" class="btn bg-green-400 text-slate-800" value="" name="done">Done</button>
+      {% endif %}
+      <!-- if type check: No, Kind Of, Yes -->
+      {% if card.human_readable_type == 'Self Check-In'%}
+      <button type="submit" href="/" class="btn bg-red-400 text-slate-800" value="" name="no">No</button>
+      <button type="submit" href="/" class="btn bg-yellow-400 text-slate-800" value="" name="kind-of">Kind Of</button>
+      <button type="submit" href="/" class="btn bg-green-400 text-slate-800" value="" name="yes">Yes</button>
+      {% endif %}
+      <!-- if type misc: "Show Next", "Cool, thanks!" -->
+      {% if card.human_readable_type == 'Miscellaneous'%}
+      <button type="submit" href="/" class="btn bg-yellow-400 text-slate-800" value="" name="show-next">Show
+        Next</button>
+      <button type="submit" href="/" class="btn bg-green-400 text-slate-800" value="" name="cool-thanks">Cool,
+        thanks!</button>
+      {% endif %}
+      <!-- if article: "Not Today", "Made Some Progress", "Done" -->
+      {% if card.human_readable_type == 'Article'%}
+      <button type="submit" href="/" class="btn bg-red-400 text-slate-800" value="" name="not-today">Not Today</button>
+      <button type="submit" href="/" class="btn bg-yellow-400 text-slate-800" value="" name="made-some-progress">Made
+        Some
+        Progress</button>
+      <button type="submit" href="/" class="btn bg-green-400 text-slate-800" value="" name="done">Done</button>
+      {% endif %}
+      <!-- if book: "Not Today", "Done", "Finished Book" -->
+      {% if card.human_readable_type == 'Book'%}
+      <button type="submit" href="/" class="btn bg-red-400 text-slate-800" value="" name="not-today">Not Today</button>
+      <button type="submit" href="/" class="btn bg-green-400 text-slate-800" value="" name="done">Done</button>
+      <button type="submit" href="/" class="btn bg-blue-400 text-slate-800" value="" name="finished-book">Finished
+        Book</button>
+      {% endif %}
+      <!-- if learn: "Wrong", "Correct", "Easy" -->
+      {% if card.human_readable_type == 'Learning'%}
+      <button type="submit" href="/" class="btn bg-red-400 text-slate-800" value="" name="wrong">Wrong</button>
+      <button type="submit" href="/" class="btn bg-yellow-400 text-slate-800" value="" name="correct">Correct</button>
+      <button type="submit" href="/" class="btn bg-green-400 text-slate-800" value="" name="easy">Easy</button>
+      {% endif %}
+    </form>
+
   </div>
 
-  <form class="flex gap-4 justify-center mt-4" action="/" method="POST">
-    <input type="hidden" name="card-id" value="{{ card.id }}">
-    {% csrf_token %}
-    {% if card.human_readable_type == 'Habit'%}
-    <button type="submit" href="/" class="btn bg-red-400 text-slate-800" value="" name="not-today">Not Today</button>
-    <button type="submit" href="/" class="btn bg-yellow-400 text-slate-800" value="" name="do-later">Do Later</button>
-    <button type="submit" href="/" class="btn bg-green-400 text-slate-800" value="" name="done">Done</button>
-    {% endif %}
-    <!-- if type check: No, Kind Of, Yes -->
-    {% if card.human_readable_type == 'Self Check-In'%}
-    <button type="submit" href="/" class="btn bg-red-400 text-slate-800" value="" name="no">No</button>
-    <button type="submit" href="/" class="btn bg-yellow-400 text-slate-800" value="" name="kind-of">Kind Of</button>
-    <button type="submit" href="/" class="btn bg-green-400 text-slate-800" value="" name="yes">Yes</button>
-    {% endif %}
-    <!-- if type misc: "Show Next", "Cool, thanks!" -->
-    {% if card.human_readable_type == 'Miscellaneous'%}
-    <button type="submit" href="/" class="btn bg-yellow-400 text-slate-800" value="" name="show-next">Show Next</button>
-    <button type="submit" href="/" class="btn bg-green-400 text-slate-800" value="" name="cool-thanks">Cool, thanks!</button>
-    {% endif %}
-    <!-- if article: "Not Today", "Made Some Progress", "Done" -->
-    {% if card.human_readable_type == 'Article'%}
-    <button type="submit" href="/" class="btn bg-red-400 text-slate-800" value="" name="not-today">Not Today</button>
-    <button type="submit" href="/" class="btn bg-yellow-400 text-slate-800" value="" name="made-some-progress">Made Some Progress</button>
-    <button type="submit" href="/" class="btn bg-green-400 text-slate-800" value="" name="done">Done</button>
-    {% endif %}
-    <!-- if book: "Not Today", "Done", "Finished Book" -->
-    {% if card.human_readable_type == 'Book'%}
-    <button type="submit" href="/" class="btn bg-red-400 text-slate-800" value="" name="not-today">Not Today</button>
-    <button type="submit" href="/" class="btn bg-green-400 text-slate-800" value="" name="done">Done</button>
-    <button type="submit" href="/" class="btn bg-blue-400 text-slate-800" value="" name="finished-book">Finished Book</button>
-    {% endif %}
-    <!-- if learn: "Wrong", "Correct", "Easy" -->
-    {% if card.human_readable_type == 'Learning'%}
-    <button type="submit" href="/" class="btn bg-red-400 text-slate-800" value=""  name="wrong">Wrong</button>
-    <button type="submit" href="/" class="btn bg-yellow-400 text-slate-800" value=""  name="correct">Correct</button>
-    <button type="submit" href="/" class="btn bg-green-400 text-slate-800" value=""  name="easy">Easy</button>
-    {% endif %}
-  </form>
+  {% else %}
 
-</div>
+  <h2 class="text-4xl text-center">Not bad, you are all catched up. Come back in a while and we will have new due cards
+    for you!</h2>
 
-{% else %}
+  {% endif %}
 
-<h2 class="text-4xl text-center">Not bad, you are all catched up. Come back in a while and we will have new due cards for you!</h2>
-
-{% endif %}
-
-{% endblock content %}
+  {% endblock content %}
