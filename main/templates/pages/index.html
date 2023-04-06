@@ -35,7 +35,7 @@
         Read this and make notes:
       </h2>
       <p class="text-2xl">
-        <a href="{{ card.template.body }}" class="link" target="_blank" rel="noopener noreferrer">
+        <a href="{{ card.template.front }}" class="link" target="_blank" rel="noopener noreferrer">
           {{ card.template.title }}
         </a>
       </p>
@@ -50,7 +50,7 @@
       {% else %}
       <h2 class="card-title text-4xl">{{ card.template.title }}</h2>
       <p class="text-xl">
-        {{ card.template.body }}
+        {{ card.template.front }}
       </p>
       {% endif %}
 

@@ -23,7 +23,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'lazysignup',
-    'stripe',
 ]
 
 MIDDLEWARE = [
@@ -111,21 +110,6 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
 
-
-DOMAIN_URL = os.environ['DOMAIN_URL']
-
-if os.environ["STRIPE_LIVE_MODE"] == "True":
-    print('stripe live mode')
-    STRIPE_PUBLIC_KEY = os.environ['STRIPE_LIVE_PUBLIC_KEY']
-    STRIPE_SECRET_KEY = os.environ['STRIPE_LIVE_SECRET_KEY']
-else:
-    print('stripe test mode')
-    STRIPE_PUBLIC_KEY = os.environ["STRIPE_TEST_PUBLIC_KEY"]
-    STRIPE_SECRET_KEY = os.environ["STRIPE_TEST_SECRET_KEY"]
-
-
-
-STRIPE_PRICE_ID = os.environ["STRIPE_PRICE_ID"]
 
 APPEND_SLASH=False
 

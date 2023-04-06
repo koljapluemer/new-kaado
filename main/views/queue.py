@@ -1,0 +1,19 @@
+from django.utils import timezone
+from ..models import *
+from django.shortcuts import render, redirect
+from django.contrib.auth.decorators import login_required
+
+@login_required(login_url='/accounts/login/')
+def queue(request):
+    # get a random card from user that is due
+    profile = request.user.profile
+    new_cards = Card.objects.filter(profile=profile, due_at__lt=timezone.now()).order_by('?')
+    print('FOUND DUE CARDS', new_cards)
+    if new_cards.count() > 0:
+        print('found a random due card')
+        new_card = new_cards.first()
+    else:
+        print('no due cards')
+        new_card = None
+
+    return render(request, 'pages/index.html', {'card': new_card})
