@@ -48,18 +48,6 @@
         {{ card.back|markdownify }}
       </p>
       {% endif %}
-      <div id="stats">
-        {% for log in card.log_set.all %}
-        {% if log.score > 0 %}
-        <div class="badge badge-success"></div>
-        {% elif log.score < 0 %}
-        <div class="badge badge-error"></div>
-        {% else %}
-        <div class="badge badge-warning"></div>
-        {% endif %}
-        {% endfor %}
-        </div>
-      </div>
     </div>
 
     <form class="flex gap-4 justify-center mt-4" action="/" method="POST">
@@ -105,7 +93,18 @@
       <button type="submit" href="/" class="btn bg-green-400 text-slate-800" value="" name="easy">Easy</button>
       {% endif %}
     </form>
+  </div>
 
+  <div id="stats" class="flex justify-center">
+    {% for log in card.log_set.all %}
+    {% if log.score > 0 %}
+    <div class="badge mx-1 badge-success">{{ log.score }} | {{ log.input_type }}</div>
+    {% elif log.score < 0 %}
+    <div class="badge mx-1 badge-error">{{ log.score }} | {{ log.input_type }}</div>
+    {% else %}
+    <div class="badge mx-1 badge-warning">{{ log.score }} | {{ log.input_type }}</div>
+    {% endif %}
+    {% endfor %}
   </div>
 
   {% else %}
