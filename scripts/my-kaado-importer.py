@@ -11,7 +11,6 @@ def run():
         next(reader) 
         for row in reader:
             # if row has full data
-            if len(row) == 16:
                 card = Card()
                 card.profile = profile
                 # convert created at from '2023-02-07 19:28:26.10849+00' to DateTimeField
@@ -38,5 +37,3 @@ def run():
                     # get or create tag
                     tag, created = Tag.objects.get_or_create(name=tag_from_collection, profile=profile)
                     card.tags.add(tag)
-            else: 
-                print('SKIPPING SHORT ROW:', row, '\n\n')

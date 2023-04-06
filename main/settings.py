@@ -121,7 +121,6 @@ try:
 except:
     DEBUG = False
 
-print('DEBUG: ', DEBUG)
 SENDGRID_API_KEY = os.environ['SENDGRID_API_KEY']
 
 EMAIL_HOST = 'smtp.sendgrid.net'
@@ -135,3 +134,5 @@ DEFAULT_FROM_EMAIL = os.environ['DEFAULT_FROM_EMAIL']
 django_heroku.settings(locals())
 
 DEFAULT_AUTO_FIELD='django.db.models.AutoField' 
+
+DATA_UPLOAD_MAX_NUMBER_FIELDS = 100240
