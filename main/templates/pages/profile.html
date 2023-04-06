@@ -1,0 +1,28 @@
+{% extends 'boilerplate/page.html' %}
+{% block content %}
+
+
+<h1 class="text-xl font-bold">Welcome {{user.username}}</h1>
+You are a Premium user. Thank you! <br>
+<br>
+
+<div class="my-4">
+  You are billed $4/month for your subscription. Your subscription will be immediately cancelled by deleting your account. <br>
+</div>
+
+<a class="btn my-4" href="{% url 'logout' %}">Logout</a>
+
+
+<div class="border-red-500 border rounded p-4 mt-4 flex flex-col gap-4">
+  <h2 class="font-bold">Danger Zone</h2>
+  <a class="btn" href="/accounts/password_change/">Change password</a>
+  <a class="btn btn-danger" href="/deleteUser"
+    onclick="return confirm('Are you sure? This immediately deletes all your data and cancels your subscription!');">Delete
+    User</a>
+</div>
+</div>
+
+
+
+
+{% endblock %}

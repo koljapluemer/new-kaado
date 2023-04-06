@@ -1,0 +1,32 @@
+{% extends 'boilerplate/page.html' %}
+{% block content %}
+
+<div class="note">
+  <h1>Settings</h1>
+  <p>[All features are experimental]</p>
+</div>
+<div id="settings-notes">
+  <div class="note">
+    <h2>Export</h2>
+    <a href="/download">Download my notes</a>
+  </div>
+
+  <div class="note">
+    <h2>Regenerate Welcome Note</h2>
+    Use this if you deleted or modified your "Welcome" note and want it restored:
+    <a href="generateWelcomeNote">Get new Welcome note</a>
+  </div>
+
+  <div class="note">
+    <h2>Account & Payment</h2>
+    <ul>
+      <li>Stripe Email: {{ stripe_email }} </li>
+      <li>Subscription: {{ subscription_status }}</li>
+    </ul>
+
+  </div>
+</div>
+
+
+
+{% endblock content %}
