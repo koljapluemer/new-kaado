@@ -21,6 +21,8 @@ CARD_TYPES = (
     ('Habit', 'habit'),
     ('Self Check-In', 'check'),
     ('Miscellaneous', 'misc'),
+    ('Miscellaneous', 'other'),
+    ('Miscellaneous', 'standard'),
     ('Book', 'book'),
     ('Article', 'article'),
     ('Learning', 'learn'),
@@ -47,3 +49,10 @@ class Card(models.Model):
     interval = models.IntegerField(default=1)
     interval_unit = models.CharField(max_length=1, default="d")
     due_at = models.DateTimeField(default=timezone.now)
+    old_id = models.TextField(null=True, blank=True)
+
+    @property
+    def human_readable_type(self):
+        for choice in CARD_TYPES:
+            if choice[1] == self.type:
+                return choice[0]

@@ -32,6 +32,8 @@ def run():
         card.interval_unit = row['unit'][0] if row['unit'] else 'd'
         # convert from js  timestamp in the style of "1695585013" to datetime
         card.due_at = datetime.datetime.fromtimestamp(float(row['nextShown'])/1000)
+
+        card.old_id = row['id']
         card.save()
 
         tag_from_collection = row['pack_id']

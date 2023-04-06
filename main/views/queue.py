@@ -7,13 +7,11 @@ from django.contrib.auth.decorators import login_required
 def queue(request):
     # get a random card from user that is due
     profile = request.user.profile
-    new_cards = Card.objects.filter(profile=profile, due_at__lt=timezone.now()).order_by('?')
-    print('FOUND DUE CARDS', new_cards)
-    if new_cards.count() > 0:
-        print('found a random due card')
-        new_card = new_cards.first()
+    new_card = Card.objects.filter(profile=profile, due_at__lt=timezone.now()).order_by('?').first()
+    if new_card:
+        print('found a random due card', new_card)
     else:
         print('no due cards')
         new_card = None
 
-    return render(request, 'pages/index.html', {'card': new_card})
+    return render(request, 'pages/queue.html', {'card': new_card})
