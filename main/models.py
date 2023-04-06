@@ -56,3 +56,15 @@ class Card(models.Model):
         for choice in CARD_TYPES:
             if choice[1] == self.type:
                 return choice[0]
+            
+
+class Log(models.Model):
+    profile = models.ForeignKey(Profile, on_delete=models.CASCADE)
+    card = models.ForeignKey(Card, on_delete=models.CASCADE, null=True, blank=True)
+    created_at = models.DateTimeField(default=timezone.now)
+    score = models.IntegerField(default=0)
+    type = models.TextField(choices=CARD_TYPES, null=True, blank=True)
+    old_id = models.TextField(null=True, blank=True)
+    input_type = models.IntegerField(default=99, null=True, blank=True)
+    skip_note = models.TextField(null=True, blank=True)
+    card_front = models.TextField(null=True, blank=True)
