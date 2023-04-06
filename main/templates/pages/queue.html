@@ -7,51 +7,48 @@
 <div class="flex flex-col flex-grow justify-around">
 
   {% if card %}
+  {% load markdownify %}
   <div class="card p-2 bg-base-200 shadow-xl">
+    <div class="badge">
+      {{ card.human_readable_type }}
+      {% if card.human_readable_type == 'Habit' or card.human_readable_type == 'Self Check-In' %}
+      , every
+      {% if card.interval == 1 %}
+      day
+      {% else %}
+      {{ card.interval }}
+      {% if card.interval_unit == 'd' %}
+      days
+      {% else %}
+      hours
+      {% endif %}
+      {% endif %}
+      {% endif %}
+    </div>
 
     <div class="card-body">
-      <div class="badge">
-        {{ card.human_readable_type }}
-        {% if card.human_readable_type == 'Habit' or card.human_readable_type == 'Self Check-In' %}
-        , every
-        {% if card.interval == 1 %}
-        day
-        {% else %}
-        {{ card.every }}
-        {% if card.interval_unit == 'd' %}
-        days
-        {% else %}
-        hours
-        {% endif %}
-        {% endif %}
-        {% endif %}
-      </div>
 
       <!-- if Article -->
       {% if card.human_readable_type == 'Article' %}
       <h2 class="card-title text-xl">
         Read this and make notes:
       </h2>
-      <p class="text-2xl">
-        <a href="{{ card.front }}" class="link" target="_blank" rel="noopener noreferrer">
-          {{ card.title }}
-        </a>
-      </p>
       <!-- if Book -->
       {% elif card.human_readable_type == 'Book' %}
       <h2 class="card-title text-xl">
         Read at least 1 page of:
       </h2>
-      <p class="text-2xl">
-        {{ card.title }}
-      </p>
-      {% else %}
-      <h2 class="card-title text-4xl">{{ card.title }}</h2>
-      <p class="text-xl">
-        {{ card.front }}
-      </p>
       {% endif %}
 
+      <p>
+        {{ card.front|markdownify }}
+      </p>
+      {% if card.back %}
+      <p class="border-t border-base-300 mt-4 pt-4">
+        {{ card.back|markdownify }}
+      </p>
+
+      {% endif %}
     </div>
   </div>
 

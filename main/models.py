@@ -17,6 +17,7 @@ class Tag(models.Model):
     def __str__(self):
         return self.name
     
+# TODO: fix this in backend and kick the redundant ones
 CARD_TYPES = (
     ('Habit', 'habit'),
     ('Self Check-In', 'check'),
@@ -24,7 +25,9 @@ CARD_TYPES = (
     ('Miscellaneous', 'other'),
     ('Miscellaneous', 'standard'),
     ('Book', 'book'),
+    ('Book', 'readingList'),
     ('Article', 'article'),
+    ('Article', 'articleList'),
     ('Learning', 'learn'),
     ('Project', 'project'),
 )
