@@ -22,7 +22,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'lazysignup',
+    'django_extensions',
 ]
 
 MIDDLEWARE = [
@@ -37,7 +37,6 @@ MIDDLEWARE = [
 
 AUTHENTICATION_BACKENDS = (
   'django.contrib.auth.backends.ModelBackend',
-  'lazysignup.backends.LazySignupBackend',
 )
 
 
@@ -135,5 +134,4 @@ DEFAULT_FROM_EMAIL = os.environ['DEFAULT_FROM_EMAIL']
 # Activate Django-Heroku.
 django_heroku.settings(locals())
 
-
-LAZYSIGNUP_CUSTOM_USER_CREATION_FORM = 'main.forms.SignUpForm'
+DEFAULT_AUTO_FIELD='django.db.models.AutoField' 

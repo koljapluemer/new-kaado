@@ -15,7 +15,6 @@
   <meta name="description" property="og:description"
     content="Become a better maker, one card at a time. Themakerswalk collects habits, resources and learning materials for entrepreneur." />
 </head>
-{% load i18n lazysignup_tags %}
 
 <body class="page-content content flex flex-col justify-end h-full">
   <header class="p-4">
@@ -31,7 +30,7 @@
   <footer class="footer flex justify-around py-2">
     <a href="/" class="font-bold">My Cards</a>
     <a href="/about">Learn More</a>
-    {% if not user|is_lazy_user %}
+    {% if not user %}
     <a href="/profile">Account</a>
     {% else %}
     <a href="/premium">Go Premium</a>

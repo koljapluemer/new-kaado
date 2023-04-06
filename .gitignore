@@ -4,6 +4,8 @@
 .env
 .virtualenv
 .envvalues
+*csv
+.~lock*
 
 deployLocally.sh
 

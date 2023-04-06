@@ -6,7 +6,6 @@ from django.conf import settings as settings_conf
 from django.contrib.auth import (
     authenticate, get_user_model, password_validation, login
 )
-from lazysignup.utils import is_lazy_user
 
 
 
