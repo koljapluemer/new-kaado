@@ -46,7 +46,7 @@
           {{ card.front|markdownify }}
         </p>
         {% if card.back %}
-        <div x-show="showBack">
+        <div x-show="showBack" x-cloak>
           <hr>
           <div x-show="showBack">
             {{ card.back|markdownify }}
