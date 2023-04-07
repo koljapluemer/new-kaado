@@ -21,6 +21,7 @@ def run():
         log.score = row['value']
         log.type = row['type']
         log.old_id = row['id']
+        # TODO: this should work i don't know why it wouldnt..
         log.input_type = row['input_type']
         log.skip_note = row['skip_note']
         log.card_front = row['card_front']

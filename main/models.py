@@ -68,6 +68,6 @@ class Log(models.Model):
     score = models.IntegerField(default=0)
     type = models.TextField(choices=CARD_TYPES, null=True, blank=True)
     old_id = models.TextField(null=True, blank=True)
-    input_type = models.IntegerField(default=99, null=True, blank=True)
+    input_type = models.IntegerField(null=True, blank=True)
     skip_note = models.TextField(null=True, blank=True)
     card_front = models.TextField(null=True, blank=True)

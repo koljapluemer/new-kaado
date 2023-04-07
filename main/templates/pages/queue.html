@@ -33,14 +33,14 @@
 
         <!-- if Article -->
         {% if card.human_readable_type == 'Article' %}
-        <h2>
+        <h6>
           Read this and make notes:
-        </h2>
+        </h6>
         <!-- if Book -->
         {% elif card.human_readable_type == 'Book' %}
-        <h2>
+        <h6>
           Read at least 1 page of:
-        </h2>
+        </h6>
         {% endif %}
         <p>
           {{ card.front|markdown|safe}}
@@ -61,7 +61,7 @@
       <button @click="showBack = true">Reveal</button>
     </div>
 
-    <form action="/" method="POST" class="m center" x-show="showBack">
+    <form action="/" method="POST" class="m center" x-show="showBack" x-cloak>
       <input type="hidden" name="card-id" value="{{ card.id }}">
       {% csrf_token %}
 
