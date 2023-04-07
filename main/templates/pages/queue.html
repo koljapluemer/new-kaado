@@ -2,7 +2,7 @@
 {% block content %}
 <div id="content" x-data="{ showBack: false }">
     {% if card %}
-    {% load markdownify %}
+    {% load markdown %}
     <div class="card m">
       <div class="badge">
         {{ card.human_readable_type }}
@@ -43,13 +43,13 @@
         </h2>
         {% endif %}
         <p>
-          {{ card.front|markdownify }}
+          {{ card.front|markdown|safe}}
         </p>
         {% if card.back %}
         <div x-show="showBack" x-cloak>
           <hr>
           <div x-show="showBack">
-            {{ card.back|markdownify }}
+            {{ card.back|markdown|safe }}
           </div>
         </div>
         {% endif %}
