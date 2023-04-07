@@ -25,6 +25,14 @@
       {% endif %}
       {% endif %}
     </div>
+    <div class="div">
+      {% for tag in card.tags.all %}
+      <div class="badge">
+        {{ tag }}
+      </div>
+      {% endfor %}
+    </div>
+
 
     <div class="card-body">
 
