@@ -1,42 +1,49 @@
 <!DOCTYPE html>
-<html lang="en" class="h-full">
+<html lang="en">
 
 <head>
-  <meta charset="utf-8" />
-  <!-- set meta tag for screen size -->
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>The Maker's Walk</title>
-  <link href="https://cdn.jsdelivr.net/npm/daisyui@2.43.0/dist/full.css" rel="stylesheet" type="text/css" />
-  <script src="https://cdn.tailwindcss.com"></script>
 
-  {% load static %}
-  <link href="https://fonts.googleapis.com/css?family=Oswald|Source+Sans+Pro&display=swap" rel="stylesheet" />
-  <link rel="shortcut icon" type="image/png" href="{% static 'favicon.ico' %}" />
+  <!-- Basic Page Needs
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta charset="utf-8">
+  <title>Kaado 2</title>
   <meta name="description" property="og:description"
-    content="Become a better maker, one card at a time. Themakerswalk collects habits, resources and learning materials for entrepreneur." />
+    content="Everything is a card. All your learning, habits, to-dos, quotes and inspiration in one place." />
+  <meta name="author" content="Kolja Plümer">
+  {% load static %}
+
+
+  <!-- Mobile Specific Metas
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- FONT
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
+
+  <!-- load css from static/css -->
+  <link rel="stylesheet" href="{% static 'css/normalize.css' %}">
+  <link rel="stylesheet" href="{% static 'css/skeleton.css' %}">
+  <link rel="stylesheet" href="{% static 'css/custom.css' %}">
+
 </head>
 
-<body class="page-content content flex flex-col justify-end h-full">
-  <header class="p-4">
-    <h1 class="font-bold text-xl text-center">The Maker's Walk</h1>
-  </header>
+<body>
 
-  <main class="flex flex-col items-center p-2 flex-grow">
-    {% block content %}
-    {% endblock content %}
-  </main>
 
-  <footer class="footer flex justify-around py-2">
-    <a href="/" class="font-bold">My Cards</a>
-    <a href="/about">Learn More</a>
-    {% if not user %}
-    <a href="/profile">Account</a>
-    {% else %}
-    <a href="/premium">Go Premium</a>
-    {% endif %}
-  </footer>
-  <script data-goatcounter="https://themakerswalk.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+  <!-- Primary Page Layout
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <div class="container">
+    <div class="row">
+      <div class="one-half column">
+        {% block content %}
+        {% endblock content %}
+      </div>
+    </div>
+  </div>
 
+  <!-- End Document
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
 </body>
 
 </html>

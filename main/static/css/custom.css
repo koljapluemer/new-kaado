@@ -1,0 +1,70 @@
+.m {
+    margin: 16px;
+}
+
+.m-t {
+    margin-top: 16px;
+}
+
+.m-r {
+    margin-right: 16px;
+}
+
+.m-b {
+    margin-bottom: 16px;
+}
+
+.m-l {
+    margin-left: 16px;
+}
+
+.m-x {
+    margin-left: 16px;
+    margin-right: 16px;
+}
+
+.m-y {
+    margin-top: 16px;
+    margin-bottom: 16px;
+}
+
+.p {
+    padding: 16px;
+}
+
+.p-t {
+    padding-top: 16px;
+}
+
+.p-r {
+    padding-right: 16px;
+}
+
+.p-b {
+    padding-bottom: 16px;
+}
+
+.p-l {
+    padding-left: 16px;
+}
+
+.p-x {
+    padding-left: 16px;
+    padding-right: 16px;
+}
+
+.p-y {
+    padding-top: 16px;
+    padding-bottom: 16px;
+}
+
+.border {
+    border: 1px solid #e5e5e5;
+}
+
+.badge {
+    background: #e5e5e5;
+    padding: 6px;
+    border-radius: 6px;
+    font-size: 0.8rem;
+}
