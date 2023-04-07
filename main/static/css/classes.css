@@ -62,9 +62,30 @@
     border: 1px solid #e5e5e5;
 }
 
+.card {
+    border: 1px solid #e5e5e5;
+    padding: 16px;
+    border-radius: 6px;
+    overflow: auto;
+}
+
 .badge {
     background: #e5e5e5;
     padding: 6px;
     border-radius: 6px;
-    font-size: 0.8rem;
+    font-size: 1rem;
+    display: inline-block;
+    margin: 6px 0;
+}
+
+.around {
+    display: flex;
+    justify-content: space-around;  
+}
+
+.center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 6px;
 }

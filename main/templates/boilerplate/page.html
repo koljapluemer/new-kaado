@@ -24,7 +24,8 @@
   <!-- load css from static/css -->
   <link rel="stylesheet" href="{% static 'css/normalize.css' %}">
   <link rel="stylesheet" href="{% static 'css/skeleton.css' %}">
-  <link rel="stylesheet" href="{% static 'css/custom.css' %}">
+  <link rel="stylesheet" href="{% static 'css/elements.css' %}">
+  <link rel="stylesheet" href="{% static 'css/classes.css' %}">
 
 </head>
 
@@ -35,7 +36,7 @@
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
   <div class="container">
     <div class="row">
-      <div class="one-half column">
+      <div class="column">
         {% block content %}
         {% endblock content %}
       </div>
