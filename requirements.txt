@@ -22,6 +22,8 @@ django-extensions==3.2.1
     # via -r requirements.in
 django-heroku==0.3.1
     # via -r requirements.in
+gunicorn==20.1.0
+    # via -r requirements.in
 markdown==3.4.3
     # via -r requirements.in
 psycopg2==2.9.6
@@ -36,3 +38,6 @@ typing-extensions==4.5.0
     # via dj-database-url
 whitenoise==6.4.0
     # via django-heroku
+
+# The following packages are considered to be unsafe in a requirements file:
+# setuptools

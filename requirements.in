@@ -5,3 +5,4 @@ django-environ
 Markdown
 supermemo2
 django-extensions
+gunicorn
