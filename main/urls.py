@@ -2,6 +2,7 @@ from django.urls import path, include
 from . import views
 from django.contrib.auth import views as auth_views
 from django.contrib import admin
+from .views import CardListView, CardCreateView
 
 urlpatterns = [
     # pages
@@ -19,4 +20,8 @@ urlpatterns = [
 
     # stats
     path('stats', views.stats),
+
+    # cards pregenerated
+    path('cards', CardListView.as_view(), name='card_list'),
+    path('cards/new', CardCreateView.as_view(), name='card_new'),
 ]
