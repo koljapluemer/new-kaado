@@ -3,16 +3,32 @@
 * start testing
 * implement debug framework
 * implement messages framework
+* find a way to keep the q card constant (in case we want to edit and go back)
+* rename the card types in Tuple of Card Edit form
+* allow basic connections
 
 ## SHOULD
 
 * more elaborate algo for what to queue/how much is due
+* implement the "write down your excuse for not doing this"
+* adapt Edit card / new Card
+* show that connection worked
+* handle long blockquotes
+* check whether quotes work at all
+* allow Search
+* display the excuses
+* implement connect feature
+* allow bug reporting in UI
+* handle projects correctly
 
-## BACKLOG
+## COULD
 
+* finish the github style statistics feature
+* research better SR
 * import all supabase data
 * all the auth stuff
 * landing page/onboarding
+* allow filtering the queue to only fun stuff
 
 ## IDEAS
 
