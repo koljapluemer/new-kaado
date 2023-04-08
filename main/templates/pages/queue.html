@@ -1,118 +1,121 @@
 {% extends 'boilerplate/page.html' %}
 {% block content %}
 <div id="content" x-data="{ showBack: false }">
-    {% if card %}
-    {% load markdown %}
-    <div class="card m">
+  {% if card %}
+  {% load markdown %}
+  <div class="card m">
+    <div class="badge">
+      {{ card.human_readable_type }}
+      {% if card.human_readable_type == 'Habit' or card.human_readable_type == 'Self Check-In' %}
+      , every
+      {% if card.interval == 1 %}
+      day
+      {% else %}
+      {{ card.interval }}
+      {% if card.interval_unit == 'd' %}
+      days
+      {% else %}
+      hours
+      {% endif %}
+      {% endif %}
+      {% endif %}
+    </div>
+    <div class="m-b">
+      {% for tag in card.tags.all %}
       <div class="badge">
-        {{ card.human_readable_type }}
-        {% if card.human_readable_type == 'Habit' or card.human_readable_type == 'Self Check-In' %}
-        , every
-        {% if card.interval == 1 %}
-        day
-        {% else %}
-        {{ card.interval }}
-        {% if card.interval_unit == 'd' %}
-        days
-        {% else %}
-        hours
-        {% endif %}
-        {% endif %}
-        {% endif %}
+        {{ tag }}
       </div>
-      <div class="m-b">
-        {% for tag in card.tags.all %}
-        <div class="badge">
-          {{ tag }}
-        </div>
-        {% endfor %}
-      </div>
-
-
-      <div class="m-t">
-
-        <!-- if Article -->
-        {% if card.human_readable_type == 'Article' %}
-        <h6>
-          Read this and make notes:
-        </h6>
-        <!-- if Book -->
-        {% elif card.human_readable_type == 'Book' %}
-        <h6>
-          Read at least 1 page of:
-        </h6>
-        {% endif %}
-        <p>
-          {{ card.front|markdown|safe}}
-        </p>
-        {% if card.back %}
-        <div x-show="showBack" x-cloak>
-          <hr>
-          <div x-show="showBack">
-            {{ card.back|markdown|safe }}
-          </div>
-        </div>
-        {% endif %}
-      </div>
+      {% endfor %}
     </div>
 
-    {% if card.human_readable_type == 'Learning' %}
-    <div class="m center" x-show="!showBack">
-      <button @click="showBack = true">Reveal</button>
+
+    <div class="m-t">
+
+      <!-- if Article -->
+      {% if card.human_readable_type == 'Article' %}
+      <h6>
+        Read this and make notes:
+      </h6>
+      <!-- if Book -->
+      {% elif card.human_readable_type == 'Book' %}
+      <h6>
+        Read at least 1 page of:
+      </h6>
+      {% endif %}
+      <p>
+        {{ card.front|markdown|safe}}
+      </p>
+      {% if card.back %}
+      <div x-show="showBack" x-cloak>
+        <hr>
+        <div x-show="showBack">
+          {{ card.back|markdown|safe }}
+        </div>
+      </div>
+      {% endif %}
     </div>
+  </div>
 
-    <form action="/" method="POST" class="m center" x-show="showBack" x-cloak>
-      <input type="hidden" name="card-id" value="{{ card.id }}">
-      {% csrf_token %}
+  {% if card.human_readable_type == 'Learning' %}
+  <div class="m center" x-show="!showBack">
+    <button @click="showBack = true">Reveal</button>
+  </div>
 
-      <button type="submit" href="/">Wrong</button>
-      <button type="submit" href="/">Correct</button>
-      <button type="submit" href="/">Easy</button>
-    </form>
-    {% else %}
+  <form action="/" method="POST" class="m center" x-show="showBack" x-cloak>
+    <input type="hidden" name="card-id" value="{{ card.id }}">
+    {% csrf_token %}
+
+<!-- TODO: don't like this naming a lot -->
+
+    <button type="submit" href="/" name="0">Blackout</button>
+    <button type="submit" href="/" name="1">Wrong</button>
+    <button type="submit" href="/" name="2">Incorrect But Remembered</button>
+    <button type="submit" href="/" name="3">Correct But Hard</button>
+    <button type="submit" href="/" name="4">Good</button>
+    <button type="submit" href="/" name="5">Easy</button>
+  </form>
+  {% else %}
 
 
-    <form action="/" method="POST" class="m center">
-      <input type="hidden" name="card-id" value="{{ card.id }}">
-      {% csrf_token %}
-      {% if card.human_readable_type == 'Habit'%}
-      <button type="submit" href="/">Not Today</button>
-      <button type="submit" href="/">Do Later</button>
-      <button type="submit" href="/">Done</button>
-      {% endif %}
-      <!-- if type check: No, Kind Of, Yes -->
-      {% if card.human_readable_type == 'Self Check-In'%}
-      <button type="submit" href="/">No</button>
-      <button type="submit" href="/">Kind Of</button>
-      <button type="submit" href="/">Yes</button>
-      {% endif %}
-      <!-- if type misc: "Show Next", "Cool, thanks!" -->
-      {% if card.human_readable_type == 'Miscellaneous'%}
-      <button type="submit" href="/">Show
-        Next</button>
-      <button type="submit" href="/">Cool,
-        thanks!</button>
-      {% endif %}
-      <!-- if article: "Not Today", "Made Some Progress", "Done" -->
-      {% if card.human_readable_type == 'Article'%}
-      <button type="submit" href="/">Not Today</button>
-      <button type="submit" href="/">Made
-        Some
-        Progress</button>
-      <button type="submit" href="/">Done</button>
-      {% endif %}
-      <!-- if book: "Not Today", "Done", "Finished Book" -->
-      {% if card.human_readable_type == 'Book'%}
-      <button type="submit" href="/">Not Today</button>
-      <button type="submit" href="/">Done</button>
-      <button type="submit" href="/">Finished
-        Book</button>
-      {% endif %}
-    </form>
+  <form action="/" method="POST" class="m center">
+    <input type="hidden" name="card-id" value="{{ card.id }}">
+    {% csrf_token %}
+    {% if card.human_readable_type == 'Habit'%}
+    <!-- not today, do later, done -->
+    <button type="submit" href="/" name="not-today">Not Today</button>
+    <button type="submit" href="/" name="do-later">Do Later</button>
+    <button type="submit" href="/" name="done">Done</button>
     {% endif %}
+    <!-- if type check: No, Kind Of, Yes -->
+    {% if card.human_readable_type == 'Self Check-In'%}
+    <button type="submit" href="/" name="no">No</button>
+    <button type="submit" href="/" name="kind-of">Kind Of</button>
+    <button type="submit" href="/" name="yes">Yes</button>
+    {% endif %}
+    <!-- if type misc: "Show Next", "Cool, thanks!" -->
+    {% if card.human_readable_type == 'Miscellaneous'%}
+    <button type="submit" href="/" name="show-next">Show Next</button>
+    <button type="submit" href="/" name="cool-thanks">Cool, thanks!</button>
+    {% endif %}
+    {% if card.human_readable_type == 'Article'%}
+    <button type="submit" href="/" name="not-today">Not Today</button>
+    <button type="submit" href="/" name="do-later">Do Later</button>
+    <button type="submit" href="/" name="made-some-progress">Made Some Progress</button>
+    <button type="submit" href="/" name="finished">Finished</button>
+    {% endif %}
+    <!-- if book: "Not Today", "Done", "Finished Book" -->
+    {% if card.human_readable_type == 'Book'%}
+    <button type="submit" href="/" name="not-today">Not Today</button>
+    <button type="submit" href="/" name="do-later">Do Later</button>
+    <button type="submit" href="/" name="done">Done</button>
+    <button type="submit" href="/" name="finished-book">Finished
+      Book</button>
+    {% endif %}
+  </form>
+  {% endif %}
 
-    <!-- TODO: the UI is alright, but the backend data is fucked, so revive that once that's fixed -->
-    <!-- <div id="stats" >
+  <!-- TODO: the UI is alright, but the backend data is fucked, so revive that once that's fixed -->
+  <!-- <div id="stats" >
     {% for log in card.log_set.all %}
     {% if log.score > 0 %}
     <div >{{ log.score }} | {{ log.input_type }}</div>
@@ -124,12 +127,12 @@
     {% endfor %}
   </div> -->
 
-    {% else %}
+  {% else %}
 
-    <h2>Not bad, you are all catched up. Come back in a while and we will have new due cards
-      for you!</h2>
+  <h2>Not bad, you are all catched up. Come back in a while and we will have new due cards
+    for you!</h2>
 
-    {% endif %}
+  {% endif %}
 </div>
 
-  {% endblock content %}
+{% endblock content %}

@@ -16,4 +16,7 @@ urlpatterns = [
 
     # admin
     path('admin/', admin.site.urls),
+
+    # stats
+    path('stats', views.stats),
 ]

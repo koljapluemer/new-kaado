@@ -10,7 +10,7 @@ def home(request):
         # get card from card-id 
         print('post dict: ', request.POST)
         card = Card.objects.get(id=request.POST['card-id'])
-        type = card.template.type
+        type = card.type
 
         if type == 'Habit':
             if 'not-today' in request.POST:
