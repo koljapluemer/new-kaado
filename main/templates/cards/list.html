@@ -5,7 +5,8 @@
     <ul>
         {% for card in object_list %}
         <li>
-            <a href="{{ card.get_absolute_url }}"> {{ card.front|truncatechars:50 }}</a>
+            <a  href="{% url 'card_update' card.id %}">
+                {{ card.front|truncatechars:50 }}</a>
         </li>
         {% endfor %}
     </ul>

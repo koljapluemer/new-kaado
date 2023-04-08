@@ -17,3 +17,7 @@
 ## IDEAS
 
 * set how many card you want to each day? Or time? Or code the queue in such a way that it's finishable?
+
+## BUGS
+
+* type of card does not seem to be preselected in dropdown?
