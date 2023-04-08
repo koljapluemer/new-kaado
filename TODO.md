@@ -16,10 +16,11 @@
 * handle long blockquotes
 * check whether quotes work at all
 * allow Search
-* display the excuses
+* display the excuses (don't call it `skip card`)
 * implement connect feature
 * allow bug reporting in UI
 * handle projects correctly
+* display card list, allow filtering and sorting
 
 ## COULD
 
