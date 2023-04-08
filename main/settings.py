@@ -121,15 +121,6 @@ try:
 except:
     DEBUG = False
 
-SENDGRID_API_KEY = os.environ['SENDGRID_API_KEY']
-
-EMAIL_HOST = 'smtp.sendgrid.net'
-EMAIL_HOST_USER = 'apikey'  # this is exactly the value 'apikey'
-EMAIL_HOST_PASSWORD = SENDGRID_API_KEY
-EMAIL_PORT = 587
-EMAIL_USE_TLS = True
-DEFAULT_FROM_EMAIL = os.environ['DEFAULT_FROM_EMAIL']
-
 # Activate Django-Heroku.
 django_heroku.settings(locals())
 
