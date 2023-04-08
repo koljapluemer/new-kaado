@@ -1,0 +1,7 @@
+Django
+psycopg2
+django-heroku
+django-environ
+Markdown
+supermemo2
+django-extensions
