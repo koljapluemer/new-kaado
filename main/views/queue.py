@@ -21,17 +21,17 @@ def queue(request):
                 card.due_at = timezone.now() + timedelta(minutes=10)
             elif 'done' in request.POST:
                 if card.interval_unit == 'd':
-                    card.due_at = timezone.now() + timedelta(days=card.template.interval)
+                    card.due_at = timezone.now() + timedelta(days=card.interval)
                 elif card.interval_unit == 'h':
-                    card.due_at = timezone.now() + timedelta(hours=card.template.interval)
+                    card.due_at = timezone.now() + timedelta(hours=card.interval)
         # Self Check-In
         elif type == 'check':
             # set due date to now + interval
             # check if unit is d or h
             if card.interval_unit == 'd':
-                card.due_at = timezone.now() + timedelta(days=card.template.interval)
+                card.due_at = timezone.now() + timedelta(days=card.interval)
             elif card.interval_unit == 'h':
-                card.due_at = timezone.now() + timedelta(hours=card.template.interval)
+                card.due_at = timezone.now() + timedelta(hours=card.interval)
         # Miscellaneous
         elif type == 'misc':
             if 'show-next' in request.POST:
