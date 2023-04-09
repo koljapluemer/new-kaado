@@ -7,6 +7,12 @@ from django.dispatch import receiver
 
 from django.utils import timezone
 
+from django.contrib.auth.models import AbstractUser
+
+# class User(AbstractUser):
+#     pass
+    
+
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     

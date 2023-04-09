@@ -6,7 +6,7 @@ from datetime import timedelta
 
 from supermemo2 import SMTwo
 
-@login_required(login_url='/accounts/login/')
+@login_required
 def queue(request):
     if request.method == 'POST':
         card = Card.objects.get(id=request.POST['card-id'])
@@ -92,7 +92,7 @@ def queue(request):
 
     return render(request, 'pages/queue.html', {'card': new_card})
 
-@login_required(login_url='/accounts/login/')
+@login_required
 def stats(request):
     profile = request.user.profile
     due_cards_count = Card.objects.filter(profile=profile, due_at__lt=timezone.now(), is_active=True).count()

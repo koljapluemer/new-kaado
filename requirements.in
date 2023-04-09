@@ -6,3 +6,4 @@ Markdown
 supermemo2
 django-extensions
 gunicorn
+django-allauth

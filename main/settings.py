@@ -10,7 +10,8 @@ env = environ.Env()
 environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
 
 
-ALLOWED_HOSTS = ['chaoskasten.com', 'localhost', 'chaoskasten.herokuapp.com']
+ALLOWED_HOSTS = ['chaoskasten.com', 'localhost',
+                 'chaoskasten.herokuapp.com', '127.0.0.1']
 
 # Application definition
 
@@ -23,7 +24,13 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django_extensions',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.github',
+
 ]
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -33,11 +40,13 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
 ]
 
-AUTHENTICATION_BACKENDS = (
+AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
-)
+    'allauth.account.auth_backends.AuthenticationBackend',
+]
 
 
 ROOT_URLCONF = 'main.urls'
@@ -53,6 +62,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'django.template.context_processors.request',
             ],
         },
     },
@@ -122,8 +132,29 @@ except:
     DEBUG = False
 
 # Activate Django-Heroku.
-django_heroku.settings(locals())
+# django_heroku.settings(locals())
 
 DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
 
 DATA_UPLOAD_MAX_NUMBER_FIELDS = 100240
+
+
+# oAuth
+
+OAUTH_LOGIN_PROVIDERS = {
+    "github": {
+        "class": "yourapp.oauth.GitHubOAuthProvider",
+        "kwargs": {
+            "client_id": os.environ["GITHUB_CLIENT_ID"],
+            "client_secret": os.environ["GITHUB_CLIENT_SECRET"],
+            # "scope" is optional, defaults to ""
+
+            # You can add other fields if you have additional kwargs in your class __init__
+            # def __init__(self, *args, custom_arg="default", **kwargs):
+            #     self.custom_arg = custom_arg
+            #     super().__init__(*args, **kwargs)
+        },
+    },
+}
+
+LOGIN_REDIRECT_URL="/"

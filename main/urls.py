@@ -5,7 +5,8 @@ from django.contrib import admin
 from .views import CardListView, CardCreateView, CardUpdateView, CardDeleteView
 
 urlpatterns = [
-    path('', views.queue, name='queue'),
+    path('', views.index, name='index'),
+    path('queue', views.queue, name='queue'),
     # admin
     path('admin/', admin.site.urls),
     # stats
@@ -14,4 +15,6 @@ urlpatterns = [
     path('cards', CardListView.as_view(), name='card_list'),
     path('cards/new', CardCreateView.as_view(), name='card_new'),
     path('cards/<int:pk>/update', CardUpdateView.as_view(), name='card_update'),
+    # oAuth
+    path('accounts/', include('allauth.urls')),
 ]
