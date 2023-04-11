@@ -21,6 +21,7 @@
 * allow bug reporting in UI
 * handle projects correctly
 * display card list, allow filtering and sorting
+* find out how env variables for pg variables are done properly, apparently `DATABASE_NAME` and stuff is bound to switch, yet I need it locally
 
 ## COULD
 
