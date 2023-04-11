@@ -11,3 +11,6 @@ django-allauth
 tqdm
 supabase
 ipywidgets
+
+
+whitenoise
