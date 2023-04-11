@@ -3,7 +3,7 @@
 <div id="content" class="row" x-data="{ showBack: false }">
   <div class="two columns">
     <div class="tool">
-      <a href="{% url 'card_edit' card.id %}">
+      <a href="cards/{{ card.id }}/edit">
         Edit Card
       </a>
     </div>
