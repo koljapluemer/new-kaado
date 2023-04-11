@@ -11,8 +11,6 @@
     content="Everything is a card. All your learning, habits, to-dos, quotes and inspiration in one place." />
   <meta name="author" content="Kolja Plümer">
   {% load static %}
-
-
   <!-- Mobile Specific Metas
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -35,6 +33,27 @@
   <!-- Primary Page Layout
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
   <div class="container">
+    <div class="row flex">
+      
+      <div class="two columns">
+        <a href="/">Kaado 2</a>
+      </div>
+
+      <div class="grow"></div>
+
+      <div class="six columns">
+        {% load socialaccount %}
+        {% if user.is_authenticated %}
+        <p>
+            You are logged in as {{ user.username }}.
+            <a href="{% url 'account_logout' %}">Log out</a>
+        </p>
+        {% else %}
+        <a href="{% provider_login_url "github" %}">GitHub</a>
+        {% endif %}
+      </div>
+    </div>
+  
  
     <div class="row">
       <div class="column">

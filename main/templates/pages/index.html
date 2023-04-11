@@ -3,10 +3,10 @@
 <div id="content">
 
     <div class="row">
-        {% load socialaccount %}
         <h1>
             Welcome to Kaado 2.
         </h1>
+        {% load socialaccount %}
         {% if user.is_authenticated %}
         <p>
             You are logged in as {{ user.username }}.

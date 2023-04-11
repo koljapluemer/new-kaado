@@ -95,3 +95,12 @@ blockquote {
     padding: 0 16px;
     margin: 16px 0;
 }
+
+
+.flex {
+    display: flex;
+}
+
+.grow {
+    flex-grow: 1;
+}
