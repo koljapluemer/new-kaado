@@ -5,5 +5,4 @@ from django.contrib import admin
 
 admin.site.register(Card)
 admin.site.register(Tag)
-admin.site.register(Profile)
 admin.site.register(Log)

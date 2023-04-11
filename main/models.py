@@ -9,16 +9,11 @@ from django.utils import timezone
 
 from django.contrib.auth.models import AbstractUser
 
-# class User(AbstractUser):
-#     pass
-    
-
-class Profile(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
-    
 class Tag(models.Model):
     name = models.TextField()
-    profile = models.ForeignKey(Profile, on_delete=models.CASCADE)
+    # TODO: in production, make this not nullable
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
+    old_user_id = models.TextField(null=True, blank=True)
 
     def __str__(self):
         return self.name
@@ -39,7 +34,7 @@ CARD_TYPES = (
 )
 
 class Card(models.Model):
-    profile = models.ForeignKey(Profile, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
     created_at = models.DateTimeField(default=timezone.now)
 
     front = models.TextField()
@@ -60,6 +55,12 @@ class Card(models.Model):
     due_at = models.DateTimeField(default=timezone.now)
     old_id = models.TextField(null=True, blank=True)
 
+    connected_cards = models.ManyToManyField("self", blank=True)
+    parent_cards = models.ManyToManyField("self", blank=True)
+    child_cards = models.ManyToManyField("self", blank=True)
+
+    old_user_id = models.TextField(null=True, blank=True)
+
     @property
     def human_readable_type(self):
         for choice in CARD_TYPES:
@@ -68,7 +69,7 @@ class Card(models.Model):
             
 
 class Log(models.Model):
-    profile = models.ForeignKey(Profile, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
     card = models.ForeignKey(Card, on_delete=models.CASCADE, null=True, blank=True)
     created_at = models.DateTimeField(default=timezone.now)
     score = models.IntegerField(default=0)
@@ -77,3 +78,5 @@ class Log(models.Model):
     input_type = models.IntegerField(null=True, blank=True)
     skip_note = models.TextField(null=True, blank=True)
     card_front = models.TextField(null=True, blank=True)
+
+    old_user_id = models.TextField(null=True, blank=True)

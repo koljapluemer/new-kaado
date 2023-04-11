@@ -30,6 +30,7 @@
 * all the auth stuff
 * landing page/onboarding
 * allow filtering the queue to only fun stuff
+* make a bash alias for the really long Python requirements thing
 
 ## IDEAS
 

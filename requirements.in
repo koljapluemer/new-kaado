@@ -7,3 +7,7 @@ supermemo2
 django-extensions
 gunicorn
 django-allauth
+# temporary supabase import stuff
+tqdm
+supabase
+ipywidgets
