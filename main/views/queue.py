@@ -86,14 +86,14 @@ def queue(request):
 
         card.save()
     # get a random card from user that is due
-    profile = request.user.profile
-    new_card = Card.objects.filter(profile=profile, due_at__lt=timezone.now(), occurrences__gt=0, is_active=True
+    user = request.user
+    new_card = Card.objects.filter(user=user, due_at__lt=timezone.now(), occurrences__gt=0, is_active=True
                                    ).order_by('?').first()
 
     return render(request, 'pages/queue.html', {'card': new_card})
 
 @login_required
 def stats(request):
-    profile = request.user.profile
-    due_cards_count = Card.objects.filter(profile=profile, due_at__lt=timezone.now(), is_active=True).count()
+    user = request.user
+    due_cards_count = Card.objects.filter(user=user, due_at__lt=timezone.now(), is_active=True).count()
     return render(request, 'pages/stats.html', {'due_cards_count': due_cards_count})

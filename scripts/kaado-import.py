@@ -114,7 +114,7 @@ def import_connections():
         except:
             print('some card does not exist')
 def run():
-    # import_cards()
-    # import_tags_from_collections()
-    # import_logs()
+    import_cards()
+    import_tags_from_collections()
+    import_logs()
     import_connections()
