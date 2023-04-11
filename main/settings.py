@@ -11,7 +11,7 @@ environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
 
 
 ALLOWED_HOSTS = ['chaoskasten.com', 'localhost',
-                 'chaoskasten.herokuapp.com', '127.0.0.1']
+                 'chaoskasten.herokuapp.com', '127.0.0.1', 'new-kaado.herokuapp.com']
 
 # Application definition
 

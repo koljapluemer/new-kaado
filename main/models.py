@@ -72,7 +72,7 @@ class Log(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
     card = models.ForeignKey(Card, on_delete=models.CASCADE, null=True, blank=True)
     created_at = models.DateTimeField(default=timezone.now)
-    score = models.IntegerField(default=0)
+    score = models.IntegerField(default=0, null=True, blank=True)
     type = models.TextField(choices=CARD_TYPES, null=True, blank=True)
     old_id = models.TextField(null=True, blank=True)
     input_type = models.IntegerField(null=True, blank=True)
