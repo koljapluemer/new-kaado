@@ -128,9 +128,13 @@ def handle_review(request):
 @login_required
 def queue(request):
     # get card from session
-    if not Card.objects.get(id=request.session['card'], user=request.user, is_active=True):
-        # return to url of name set_random_card
+    if 'card' in request.session:
+        if not Card.objects.get(id=request.session['card'], user=request.user, is_active=True):
+            # return to url of name set_random_card
+            return redirect(set_random_card)
+    else: 
         return redirect(set_random_card)
+    
     card = Card.objects.get(id=request.session['card'], user=request.user, is_active=True)
 
     return render(request, 'pages/queue.html', {'card': card})
