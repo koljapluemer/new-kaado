@@ -29,5 +29,5 @@ class CardUpdateView(UpdateView):
 
 class CardDeleteView(DeleteView):
     model = Card
-    template_name = 'cards/delete.html'
-    success_url = reverse_lazy('card_list')
+    success_url = reverse_lazy('queue')
+    template_name = 'cards/confirm_delete.html'

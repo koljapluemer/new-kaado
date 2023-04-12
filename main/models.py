@@ -18,16 +18,15 @@ class Tag(models.Model):
     def __str__(self):
         return self.name
     
-# TODO: fix this in backend and kick the redundant ones
 CARD_TYPES = (
-    ('Habit', 'habit'),
-    ('Self Check-In', 'check'),
-    ('To-Do', 'todo'),
-    ('Miscellaneous', 'misc'),
-    ('Book', 'book'),
-    ('Article', 'article'),
-    ('Learning', 'learn'),
-    ('Project', 'project'),
+    ('habit', 'Habit'),
+    ('check', 'Self Check-In'),
+    ('todo', 'To-Do'),
+    ('misc', 'Miscellaneous'),
+    ('book', 'Book'),
+    ('article', 'Article'),
+    ('learn', 'Learn Card'),
+    ('project', 'Project'),
 )
 
 class Card(models.Model):
@@ -57,13 +56,6 @@ class Card(models.Model):
     child_cards = models.ManyToManyField("self", blank=True)
 
     old_user_id = models.TextField(null=True, blank=True)
-
-    @property
-    def human_readable_type(self):
-        for choice in CARD_TYPES:
-            if choice[1] == self.type:
-                return choice[0]
-            
 
 class Log(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)

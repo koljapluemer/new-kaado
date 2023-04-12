@@ -81,6 +81,15 @@ def handle_review(request):
                 card.due_at = timezone.now() + timedelta(days=card.interval)
             elif card.interval_unit == 'h':
                 card.due_at = timezone.now() + timedelta(hours=card.interval)
+        # Todo 
+        elif type == 'todo':
+            if 'not-today' in request.POST:
+                card.due_at = timezone.now() + timedelta(days=1)
+            elif 'do-later' in request.POST:
+                card.due_at = timezone.now() + timedelta(minutes=10)
+            elif 'done' in request.POST:
+                card.delete()
+                give_message_reward = True
         # Miscellaneous
         elif type == 'misc':
             if 'show-next' in request.POST:
@@ -111,6 +120,7 @@ def handle_review(request):
             elif 'finished' in request.POST:
                 card.type = 'misc'
                 card.due_at = timezone.now() + timedelta(days=1)
+                card.front += ' *(finished reading)*'
                 give_message_reward = True
         # learn
         elif type == 'learn':
@@ -163,7 +173,7 @@ def handle_review(request):
 def queue(request):
     # get card from session
     if 'card' in request.session:
-        if not Card.objects.get(id=request.session['card'], user=request.user, is_active=True):
+        if not Card.objects.filter(id=request.session['card'], user=request.user, is_active=True):
             # return to url of name set_random_card
             return redirect(set_random_card)
     else:

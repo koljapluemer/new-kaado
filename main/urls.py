@@ -17,6 +17,7 @@ urlpatterns = [
     path('cards', CardListView.as_view(), name='card_list'),
     path('cards/new', CardCreateView.as_view(), name='card_new'),
     path('cards/<int:pk>/edit', CardUpdateView.as_view(), name='card_edit'),
+    path('cards/<int:pk>/delete', CardDeleteView.as_view(), name='card_delete'),
     # oAuth
     path('accounts/', include('allauth.urls')),
 ]
