@@ -1,0 +1,16 @@
+{% extends 'boilerplate/page.html' %}
+{% block content %}
+<div id="content">
+    <h2>All Tags</h2>
+    <a href="{% url 'tag_new' %}" class="p-y">New Tag</a>
+    <ul>
+        {% for tag in object_list %}
+        <li>
+            <a  href="{% url 'tag_edit' tag.id %}">
+                {{ tag.name|truncatechars:50 }}</a>
+        </li>
+        {% endfor %}
+    </ul>
+</div>
+
+{% endblock content %}

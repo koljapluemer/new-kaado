@@ -17,6 +17,11 @@
         Delete Card
       </a>
     </div>
+    <div class="tool border p m">
+      <a href="cards/new">
+        New Card
+      </a>
+    </div>
   </div>
   <div class="nine columns">
     {% if card %}
@@ -89,12 +94,12 @@
 
       <!-- TODO: don't like this naming a lot -->
 
-      <button type="submit"  name="0">Blackout</button>
-      <button type="submit"  name="1">Wrong</button>
-      <button type="submit"  name="2">Incorrect But Remembered</button>
-      <button type="submit"  name="3">Correct But Hard</button>
-      <button type="submit"  name="4">Good</button>
-      <button type="submit"  name="5">Easy</button>
+      <button type="submit" name="0">Blackout</button>
+      <button type="submit" name="1">Wrong</button>
+      <button type="submit" name="2">Incorrect But Remembered</button>
+      <button type="submit" name="3">Correct But Hard</button>
+      <button type="submit" name="4">Good</button>
+      <button type="submit" name="5">Easy</button>
     </form>
     {% else %}
 
@@ -104,32 +109,32 @@
       {% csrf_token %}
       {% if card.type == 'habit'%}
       <!-- not today, do later, done -->
-      <button type="submit"  name="not-today">Not Today</button>
-      <button type="submit"  name="do-later">Do Later</button>
-      <button type="submit"  name="done">Done</button>
+      <button type="submit" name="not-today">Not Today</button>
+      <button type="submit" name="do-later">Do Later</button>
+      <button type="submit" name="done">Done</button>
       <!-- if type check: No, Kind Of, Yes -->
       {% elif card.type == 'check'%}
-      <button type="submit"  name="no">No</button>
-      <button type="submit"  name="kind-of">Kind Of</button>
-      <button type="submit"  name="yes">Yes</button>
+      <button type="submit" name="no">No</button>
+      <button type="submit" name="kind-of">Kind Of</button>
+      <button type="submit" name="yes">Yes</button>
       <!-- if type misc: "Show Next", "Cool, thanks!" -->
       {% elif card.type == 'misc'%}
-      <button type="submit"  name="show-next">Show Next</button>
-      <button type="submit"  name="cool-thanks">Cool, thanks!</button>
+      <button type="submit" name="show-next">Show Next</button>
+      <button type="submit" name="cool-thanks">Cool, thanks!</button>
       {% elif card.type == 'article'%}
-      <button type="submit"  name="not-today">Not Today</button>
-      <button type="submit"  name="do-later">Do Later</button>
-      <button type="submit"  name="made-some-progress">Made Some Progress</button>
-      <button type="submit"  name="finished">Finished</button>
+      <button type="submit" name="not-today">Not Today</button>
+      <button type="submit" name="do-later">Do Later</button>
+      <button type="submit" name="made-some-progress">Made Some Progress</button>
+      <button type="submit" name="finished">Finished</button>
       <!-- if book: "Not Today", "Done", "Finished Book" -->
       {% elif card.type == 'book'%}
-      <button type="submit"  name="not-today">Not Today</button>
-      <button type="submit"  name="do-later">Do Later</button>
-      <button type="submit"  name="done">Done</button>
-      <button type="submit"  name="finished">Finished
+      <button type="submit" name="not-today">Not Today</button>
+      <button type="submit" name="do-later">Do Later</button>
+      <button type="submit" name="done">Done</button>
+      <button type="submit" name="finished">Finished
         Book</button>
       {% elif card.type == 'project' %}
-      <button type="submit"  name="done">Ok, got it scheduled</button>
+      <button type="submit" name="done">Ok, got it scheduled</button>
     </form>
 
     {% else %}

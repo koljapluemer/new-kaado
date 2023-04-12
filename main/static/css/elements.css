@@ -50,3 +50,11 @@
   display: flex;
   margin: auto;
 }
+
+#id_tags {
+  min-height: 500px;
+}
+
+#id_front {
+  min-height: 350px;
+}
