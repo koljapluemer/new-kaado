@@ -44,6 +44,14 @@
     {% endif %}
   </header>
 
+  {% if messages %}
+  <div id="messages">
+    {% for message in messages %}
+    <div class="message fade-out {{ message.tags }}">{{ message }}</div>
+    {% endfor %}
+  </div>
+  {% endif %}
+
   <main class="container full-height">
     {% block content %}
     {% endblock content %}

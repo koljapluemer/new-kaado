@@ -3,14 +3,20 @@ from ..models import *
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from datetime import timedelta
+from django.contrib import messages
+import random
 
 from supermemo2 import SMTwo
 
+
 @login_required
 def queue(request):
+
     if request.method == 'POST':
+
         card = Card.objects.get(id=request.POST['card-id'])
         type = card.type
+        give_message_reward = False
         # Habit
         if type == 'habit':
             if 'not-today' in request.POST:
@@ -24,6 +30,7 @@ def queue(request):
                     card.due_at = timezone.now() + timedelta(days=card.interval)
                 elif card.interval_unit == 'h':
                     card.due_at = timezone.now() + timedelta(hours=card.interval)
+                give_message_reward = True
         # Self Check-In
         elif type == 'check':
             # set due date to now + interval
@@ -49,6 +56,7 @@ def queue(request):
             elif 'finished' in request.POST:
                 card.type = 'misc'
                 card.due_at = timezone.now() + timedelta(days=1)
+            give_message_reward = True
         # book
         elif type == 'book':
             if 'not-today' in request.POST:
@@ -57,10 +65,11 @@ def queue(request):
                 card.due_at = timezone.now() + timedelta(minutes=10)
             elif 'done' in request.POST:
                 card.due_at = timezone.now() + timedelta(days=1)
+                give_message_reward = True
             elif 'finished' in request.POST:
                 card.type = 'misc'
                 card.due_at = timezone.now() + timedelta(days=1)
-
+                give_message_reward = True
         # learn
         elif type == 'learn':
             if '0' in request.POST:
@@ -75,8 +84,10 @@ def queue(request):
                 response = 4
             elif '5' in request.POST:
                 response = 5
+                give_message_reward = True
             # API: review = SMTwo(review.easiness, review.interval, review.repetitions).review(4, "2021-3-14")
-            review = SMTwo(card.ease, card.interval, card.repetitions).review(response)
+            review = SMTwo(card.ease, card.interval,
+                           card.repetitions).review(response)
             card.ease = review.easiness
             card.interval = review.interval
             card.repetitions = review.repetitions
@@ -85,6 +96,24 @@ def queue(request):
             card.due_at = timezone.now() + timedelta(days=review.interval)
 
         card.save()
+
+        if give_message_reward:
+            affirmations = [
+                'Good job!',
+                'Nice work.',
+                'Keep it up!',
+                'You got this.',
+                'You\'re doing great!',
+                'You\'re on a roll.',
+                'You\'re a rockstar.',
+                'Not bad...',
+                'You\'re a beast.',
+                'Impressive',
+                'You\'re a legend.',
+                'Well played.'
+            ]
+            messages.success(request, random.choice(affirmations))
+
     # get a random card from user that is due
     user = request.user
     new_card = Card.objects.filter(user=user, due_at__lt=timezone.now(), occurrences__gt=0, is_active=True
@@ -92,8 +121,10 @@ def queue(request):
 
     return render(request, 'pages/queue.html', {'card': new_card})
 
+
 @login_required
 def stats(request):
     user = request.user
-    due_cards_count = Card.objects.filter(user=user, due_at__lt=timezone.now(), is_active=True).count()
+    due_cards_count = Card.objects.filter(
+        user=user, due_at__lt=timezone.now(), is_active=True).count()
     return render(request, 'pages/stats.html', {'due_cards_count': due_cards_count})

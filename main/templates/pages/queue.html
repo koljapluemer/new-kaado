@@ -69,54 +69,54 @@
       <button @click="showBack = true">Reveal</button>
     </div>
 
-    <form action="/" method="POST" class="m center" x-show="showBack" x-cloak>
+    <form method="POST" class="m center" x-show="showBack" x-cloak>
       <input type="hidden" name="card-id" value="{{ card.id }}">
       {% csrf_token %}
 
       <!-- TODO: don't like this naming a lot -->
 
-      <button type="submit" href="/" name="0">Blackout</button>
-      <button type="submit" href="/" name="1">Wrong</button>
-      <button type="submit" href="/" name="2">Incorrect But Remembered</button>
-      <button type="submit" href="/" name="3">Correct But Hard</button>
-      <button type="submit" href="/" name="4">Good</button>
-      <button type="submit" href="/" name="5">Easy</button>
+      <button type="submit"  name="0">Blackout</button>
+      <button type="submit"  name="1">Wrong</button>
+      <button type="submit"  name="2">Incorrect But Remembered</button>
+      <button type="submit"  name="3">Correct But Hard</button>
+      <button type="submit"  name="4">Good</button>
+      <button type="submit"  name="5">Easy</button>
     </form>
     {% else %}
 
 
-    <form action="/" method="POST" class="m center">
+    <form method="POST" class="m center">
       <input type="hidden" name="card-id" value="{{ card.id }}">
       {% csrf_token %}
       {% if card.human_readable_type == 'Habit'%}
       <!-- not today, do later, done -->
-      <button type="submit" href="/" name="not-today">Not Today</button>
-      <button type="submit" href="/" name="do-later">Do Later</button>
-      <button type="submit" href="/" name="done">Done</button>
+      <button type="submit"  name="not-today">Not Today</button>
+      <button type="submit"  name="do-later">Do Later</button>
+      <button type="submit"  name="done">Done</button>
       {% endif %}
       <!-- if type check: No, Kind Of, Yes -->
       {% if card.human_readable_type == 'Self Check-In'%}
-      <button type="submit" href="/" name="no">No</button>
-      <button type="submit" href="/" name="kind-of">Kind Of</button>
-      <button type="submit" href="/" name="yes">Yes</button>
+      <button type="submit"  name="no">No</button>
+      <button type="submit"  name="kind-of">Kind Of</button>
+      <button type="submit"  name="yes">Yes</button>
       {% endif %}
       <!-- if type misc: "Show Next", "Cool, thanks!" -->
       {% if card.human_readable_type == 'Miscellaneous'%}
-      <button type="submit" href="/" name="show-next">Show Next</button>
-      <button type="submit" href="/" name="cool-thanks">Cool, thanks!</button>
+      <button type="submit"  name="show-next">Show Next</button>
+      <button type="submit"  name="cool-thanks">Cool, thanks!</button>
       {% endif %}
       {% if card.human_readable_type == 'Article'%}
-      <button type="submit" href="/" name="not-today">Not Today</button>
-      <button type="submit" href="/" name="do-later">Do Later</button>
-      <button type="submit" href="/" name="made-some-progress">Made Some Progress</button>
-      <button type="submit" href="/" name="finished">Finished</button>
+      <button type="submit"  name="not-today">Not Today</button>
+      <button type="submit"  name="do-later">Do Later</button>
+      <button type="submit"  name="made-some-progress">Made Some Progress</button>
+      <button type="submit"  name="finished">Finished</button>
       {% endif %}
       <!-- if book: "Not Today", "Done", "Finished Book" -->
       {% if card.human_readable_type == 'Book'%}
-      <button type="submit" href="/" name="not-today">Not Today</button>
-      <button type="submit" href="/" name="do-later">Do Later</button>
-      <button type="submit" href="/" name="done">Done</button>
-      <button type="submit" href="/" name="finished-book">Finished
+      <button type="submit"  name="not-today">Not Today</button>
+      <button type="submit"  name="do-later">Do Later</button>
+      <button type="submit"  name="done">Done</button>
+      <button type="submit"  name="finished-book">Finished
         Book</button>
       {% endif %}
     </form>
