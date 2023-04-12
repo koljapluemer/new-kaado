@@ -117,8 +117,6 @@ USE_L10N = True
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
-LOGIN_REDIRECT_URL = '/'
-LOGOUT_REDIRECT_URL = '/'
 
 
 APPEND_SLASH = False
@@ -159,6 +157,7 @@ OAUTH_LOGIN_PROVIDERS = {
 }
 
 LOGIN_REDIRECT_URL = "/"
+LOGOUT_REDIRECT_URL = '/'
 
 
 STORAGES = {

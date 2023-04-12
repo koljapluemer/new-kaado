@@ -1,24 +1,9 @@
 {% extends 'boilerplate/page.html' %}
 {% block content %}
-<div id="content">
-
-    <div class="row">
-        <h1>
-            Welcome to Kaado 2.
-        </h1>
-        {% load socialaccount %}
-        {% if user.is_authenticated %}
-        <p>
-            You are logged in as {{ user.username }}.
-            <a href="{% url 'account_logout' %}">Log out</a>
-        </p>
-        {% else %}
-        <h2>
-            Login
-        </h2>
-        <a href="{% provider_login_url "github" %}">GitHub</a>
-        {% endif %}
-    </div>
+<div class="flex flex-col justify-around align-center text-center full-height">
+    <h1>
+        Welcome to Kaado 2.
+    </h1>
 </div>
 
 {% endblock content %}
