@@ -13,31 +13,42 @@ from supermemo2 import SMTwo
 def set_random_card(request):
     # get a random card from user that is due
     user = request.user
-
-    # ('Habit', 'habit'),
-    # ('Self Check-In', 'check'),
-    # ('Miscellaneous', 'misc'),
-    # ('Book', 'book'),
-    # ('Article', 'article'),
-    # ('Learning', 'learn'),
-    # ('Project', 'project'),
-
     # check if 'project_shown_at' date is yesterday
     # if so, show project card
     # if not, show random card
     project_shown_at = request.session.get('project_shown_at', None)
     if project_shown_at is None or project_shown_at != timezone.now().date().isoformat():
         new_card = Card.objects.filter(user=user, type='project', is_active=True
-                                    ).order_by('?').first()
+                                       ).order_by('?').first()
         request.session['project_shown_at'] = timezone.now().date().isoformat()
     else:
-        new_card = Card.objects.filter(user=user, type__in=['habit', 'check', 'misc', 'book', 'article', 'learn'], due_at__lt=timezone.now(), occurrences__gt=0, is_active=True
-                                    ).order_by('?').first()
+        random_type = random.choice(
+            ['productivity', 'misc', 'book', 'article', 'learn'])
+        if random_type == 'productivity':
+            # get a card thats either 'todo', 'habit', or 'check'
+            new_card = Card.objects.filter(user=user, type__in=['todo', 'habit', 'check'], is_active=True, due_at__lte=timezone.now()
+                                           ).order_by('?').first()
+        elif random_type == 'book':
+            number_of_started_books = Card.objects.filter(user=user, type='book', is_active=True, is_started=True
+                                                          ).count()
+            if number_of_started_books < 5:
+                new_card = Card.objects.filter(user=user, type='book', is_active=True, is_started=False
+                                               ).order_by('?').first()
+                new_card.is_started = True
+                new_card.save()
+            else:
+                new_card = Card.objects.filter(user=user, type='book', is_active=True, is_started=True, due_at__lte=timezone.now()
+                                               ).order_by('?').first()
+        else:
+            new_card = Card.objects.filter(user=user, type=random_type, is_active=True, due_at__lte=timezone.now()
+                                           ).order_by('?').first()
 
-
-
-    
-    # save new_card to session
+        if new_card is None:
+            # try to get any card
+            new_card = Card.objects.filter(user=user, is_active=True, due_at__lte=timezone.now()
+                                           ).order_by('?').first()
+            # TODO: handle case where there are no cards, and case where user has no cards yet
+            # save new_card to session
     request.session['card'] = new_card.id
     return redirect('queue')
 
@@ -87,7 +98,7 @@ def handle_review(request):
             elif 'finished' in request.POST:
                 card.type = 'misc'
                 card.due_at = timezone.now() + timedelta(days=1)
-            give_message_reward = True
+                give_message_reward = True
         # book
         elif type == 'book':
             if 'not-today' in request.POST:
@@ -147,6 +158,7 @@ def handle_review(request):
 
     return redirect(set_random_card)
 
+
 @login_required
 def queue(request):
     # get card from session
@@ -154,10 +166,11 @@ def queue(request):
         if not Card.objects.get(id=request.session['card'], user=request.user, is_active=True):
             # return to url of name set_random_card
             return redirect(set_random_card)
-    else: 
+    else:
         return redirect(set_random_card)
-    
-    card = Card.objects.get(id=request.session['card'], user=request.user, is_active=True)
+
+    card = Card.objects.get(
+        id=request.session['card'], user=request.user, is_active=True)
 
     return render(request, 'pages/queue.html', {'card': card})
 

@@ -22,6 +22,7 @@ class Tag(models.Model):
 CARD_TYPES = (
     ('Habit', 'habit'),
     ('Self Check-In', 'check'),
+    ('To-Do', 'todo'),
     ('Miscellaneous', 'misc'),
     ('Book', 'book'),
     ('Article', 'article'),

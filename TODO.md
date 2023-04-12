@@ -5,6 +5,7 @@
 * find a way to keep the q card constant (in case we want to edit and go back)
 * rename the card types in Tuple of Card Edit form
 * allow basic connections
+* see that I'm only matched with my own cards!!
 
 ## SHOULD
 
