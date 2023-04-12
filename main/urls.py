@@ -7,6 +7,8 @@ from .views import CardListView, CardCreateView, CardUpdateView, CardDeleteView
 urlpatterns = [
     path('', views.index, name='index'),
     path('queue', views.queue, name='queue'),
+    path('handle-review', views.handle_review, name='handle_review'),
+    path('set-random-card', views.set_random_card, name='set_random_card'),
     # admin
     path('admin/', admin.site.urls),
     # stats

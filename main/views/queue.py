@@ -9,9 +9,18 @@ import random
 from supermemo2 import SMTwo
 
 
-@login_required
-def queue(request):
+def set_random_card(request):
+    # get a random card from user that is due
+    user = request.user
+    new_card = Card.objects.filter(user=user, due_at__lt=timezone.now(), occurrences__gt=0, is_active=True
+                                   ).order_by('?').first()
+    
+    # save new_card to session
+    request.session['card'] = new_card.id
+    return redirect('queue')
 
+
+def handle_review(request):
     if request.method == 'POST':
 
         card = Card.objects.get(id=request.POST['card-id'])
@@ -114,12 +123,17 @@ def queue(request):
             ]
             messages.success(request, random.choice(affirmations))
 
-    # get a random card from user that is due
-    user = request.user
-    new_card = Card.objects.filter(user=user, due_at__lt=timezone.now(), occurrences__gt=0, is_active=True
-                                   ).order_by('?').first()
+    return redirect(set_random_card)
 
-    return render(request, 'pages/queue.html', {'card': new_card})
+@login_required
+def queue(request):
+    # get card from session
+    if not Card.objects.get(id=request.session['card'], user=request.user, is_active=True):
+        # return to url of name set_random_card
+        return redirect(set_random_card)
+    card = Card.objects.get(id=request.session['card'], user=request.user, is_active=True)
+
+    return render(request, 'pages/queue.html', {'card': card})
 
 
 @login_required

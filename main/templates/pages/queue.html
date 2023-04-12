@@ -69,7 +69,7 @@
       <button @click="showBack = true">Reveal</button>
     </div>
 
-    <form method="POST" class="m center" x-show="showBack" x-cloak>
+    <form method="POST" class="m center" x-show="showBack" x-cloak action="/handle-review">
       <input type="hidden" name="card-id" value="{{ card.id }}">
       {% csrf_token %}
 
@@ -85,7 +85,7 @@
     {% else %}
 
 
-    <form method="POST" class="m center">
+    <form method="POST" class="m center" action="/handle-review">
       <input type="hidden" name="card-id" value="{{ card.id }}">
       {% csrf_token %}
       {% if card.human_readable_type == 'Habit'%}
