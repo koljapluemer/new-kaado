@@ -69,3 +69,35 @@ class Log(models.Model):
     card_front = models.TextField(null=True, blank=True)
 
     old_user_id = models.TextField(null=True, blank=True)
+
+class Review(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
+    card = models.ForeignKey(Card, on_delete=models.CASCADE, null=True, blank=True)
+    review = models.TextField()
+    created_at = models.DateTimeField(default=timezone.now)
+
+    @property
+    def get_color(self):
+        if self.review == 'not-today':
+            return 'red'
+        elif self.review == 'do-later':
+            return 'yellow'
+        elif self.review == 'done' or self.review == 'made-some-progress':
+            return 'green-light'
+        elif self.review == 'finished' or self.review == 'finished-book':
+            return 'green-dark'
+        elif self.review == '0':
+            return 'blue-lightest'
+        elif self.review == '1':
+            return 'blue-lighter'
+        elif self.review == '2':
+            return 'blue-light'
+        elif self.review == '3':
+            return 'blue'
+        elif self.review == '4':
+            return 'blue-dark'
+        elif self.review == '5':
+            return 'blue-darker'
+        else:
+            return 'grey'
+        

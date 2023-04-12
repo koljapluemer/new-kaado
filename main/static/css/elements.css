@@ -38,3 +38,15 @@
     opacity: 0;
   }
 }
+
+.review {
+  min-width: 8px;
+  min-height: 8px;
+  width: 8px;
+  height: 8px;
+}
+
+#reviews {
+  display: flex;
+  margin: auto;
+}

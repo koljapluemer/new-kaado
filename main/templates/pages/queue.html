@@ -1,5 +1,10 @@
 {% extends 'boilerplate/page.html' %}
 {% block content %}
+<div class="row" id="reviews">
+  {% for review in reviews reversed %}
+  <div class="review {{ review.get_color }}"></div>
+  {% endfor %}
+</div>
 <div id="content" class="row" x-data="{ showBack: false }">
   <div class="two columns">
     <div class="tool border p m">
@@ -121,7 +126,7 @@
       <button type="submit"  name="not-today">Not Today</button>
       <button type="submit"  name="do-later">Do Later</button>
       <button type="submit"  name="done">Done</button>
-      <button type="submit"  name="finished-book">Finished
+      <button type="submit"  name="finished">Finished
         Book</button>
       {% elif card.type == 'project' %}
       <button type="submit"  name="done">Ok, got it scheduled</button>

@@ -138,3 +138,51 @@ blockquote {
     height: 100%;
     max-height: inherit;
 }
+
+/* COLORS */
+
+.red {
+    background: #ff0000;
+}
+
+.yellow {
+    background: #e0e00f;
+}
+
+.green-light {
+    background: #00ff00;
+}
+
+.green-dark {
+    background: #0f8b0f;
+}
+
+.blue-lightest {
+    background: #e6f5ff;
+}
+
+.blue-lighter {
+    background: #add8e6;
+}
+
+.blue-light {
+    background: #87cefa;
+}
+
+.blue {
+    background: #5d5deb;
+}
+
+.blue-dark {
+    background: #0000ff;
+}
+
+.blue-darker {
+    background: #0000cd;
+}
+
+.grey {
+    background: #e0e0e0;
+}
+
+

@@ -59,15 +59,22 @@ def handle_review(request):
         card = Card.objects.get(id=request.POST['card-id'])
         type = card.type
         give_message_reward = False
+        review = Review(
+            user = request.user,
+            card = card
+        )
         # Habit
         if type == 'habit':
             if 'not-today' in request.POST:
+                review.review = 'not-today'
                 # set due date to tomorrow
                 card.due_at = timezone.now() + timedelta(days=1)
             elif 'do-later' in request.POST:
+                review.review = 'do-later'
                 # add 10 minutes to due date
                 card.due_at = timezone.now() + timedelta(minutes=10)
             elif 'done' in request.POST:
+                review.review = 'done'
                 if card.interval_unit == 'd':
                     card.due_at = timezone.now() + timedelta(days=card.interval)
                 elif card.interval_unit == 'h':
@@ -75,6 +82,7 @@ def handle_review(request):
                 give_message_reward = True
         # Self Check-In
         elif type == 'check':
+            review.review = 'check'
             # set due date to now + interval
             # check if unit is d or h
             if card.interval_unit == 'd':
@@ -84,40 +92,53 @@ def handle_review(request):
         # Todo 
         elif type == 'todo':
             if 'not-today' in request.POST:
+                review.review = 'not-today'
                 card.due_at = timezone.now() + timedelta(days=1)
             elif 'do-later' in request.POST:
+                review.review = 'do-later'
                 card.due_at = timezone.now() + timedelta(minutes=10)
             elif 'done' in request.POST:
+                review.review = 'done'
                 card.delete()
                 give_message_reward = True
         # Miscellaneous
         elif type == 'misc':
             if 'show-next' in request.POST:
+                review.review = 'show-next'
                 card.due_at = timezone.now() + timedelta(days=7)
             elif 'cool-thanks' in request.POST:
+                review.review = 'cool-thanks'
                 card.due_at = timezone.now() + timedelta(days=1)
         # article
         elif type == 'article':
             if 'not-today' in request.POST:
+                review.review = 'not-today'
                 card.due_at = timezone.now() + timedelta(days=1)
             elif 'do-later' in request.POST:
+                review.review = 'do-later'
                 card.due_at = timezone.now() + timedelta(minutes=10)
             elif 'made-some-progress' in request.POST:
+                review.review = 'made-some-progress'
                 card.due_at = timezone.now() + timedelta(days=1)
             elif 'finished' in request.POST:
+                review.review = 'finished'
                 card.type = 'misc'
                 card.due_at = timezone.now() + timedelta(days=1)
                 give_message_reward = True
         # book
         elif type == 'book':
             if 'not-today' in request.POST:
+                review.review = 'not-today'
                 card.due_at = timezone.now() + timedelta(days=1)
             elif 'do-later' in request.POST:
+                review.review = 'do-later'
                 card.due_at = timezone.now() + timedelta(minutes=10)
             elif 'done' in request.POST:
+                review.review = 'done'
                 card.due_at = timezone.now() + timedelta(days=1)
                 give_message_reward = True
             elif 'finished' in request.POST:
+                review.review = 'finished'
                 card.type = 'misc'
                 card.due_at = timezone.now() + timedelta(days=1)
                 card.front += ' *(finished reading)*'
@@ -137,17 +158,19 @@ def handle_review(request):
             elif '5' in request.POST:
                 response = 5
                 give_message_reward = True
-            # API: review = SMTwo(review.easiness, review.interval, review.repetitions).review(4, "2021-3-14")
-            review = SMTwo(card.ease, card.interval,
+
+            review.review = str(response)            
+            sm_review = SMTwo(card.ease, card.interval,
                            card.repetitions).review(response)
-            card.ease = review.easiness
-            card.interval = review.interval
-            card.repetitions = review.repetitions
+            card.ease = sm_review.easiness
+            card.interval = sm_review.interval
+            card.repetitions = sm_review.repetitions
             # this ignores the actually calculated due date, but that doesn't matter
             # since it's coarse and terrible SM2 anyways
-            card.due_at = timezone.now() + timedelta(days=review.interval)
+            card.due_at = timezone.now() + timedelta(days=sm_review.interval)
 
         card.save()
+        review.save()
 
         if give_message_reward:
             affirmations = [
@@ -181,8 +204,11 @@ def queue(request):
 
     card = Card.objects.get(
         id=request.session['card'], user=request.user, is_active=True)
+    
+    # get last 50 reviews
+    reviews = Review.objects.filter(user=request.user).order_by('-created_at')[:120]
 
-    return render(request, 'pages/queue.html', {'card': card})
+    return render(request, 'pages/queue.html', {'card': card, 'reviews': reviews})
 
 
 @login_required
