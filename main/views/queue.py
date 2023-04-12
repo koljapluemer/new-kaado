@@ -5,6 +5,7 @@ from django.contrib.auth.decorators import login_required
 from datetime import timedelta
 from django.contrib import messages
 import random
+from django.contrib.sessions.models import Session
 
 from supermemo2 import SMTwo
 
@@ -12,8 +13,29 @@ from supermemo2 import SMTwo
 def set_random_card(request):
     # get a random card from user that is due
     user = request.user
-    new_card = Card.objects.filter(user=user, due_at__lt=timezone.now(), occurrences__gt=0, is_active=True
-                                   ).order_by('?').first()
+
+    # ('Habit', 'habit'),
+    # ('Self Check-In', 'check'),
+    # ('Miscellaneous', 'misc'),
+    # ('Book', 'book'),
+    # ('Article', 'article'),
+    # ('Learning', 'learn'),
+    # ('Project', 'project'),
+
+    # check if 'project_shown_at' date is yesterday
+    # if so, show project card
+    # if not, show random card
+    project_shown_at = request.session.get('project_shown_at', None)
+    if project_shown_at is None or project_shown_at != timezone.now().date().isoformat():
+        new_card = Card.objects.filter(user=user, type='project', is_active=True
+                                    ).order_by('?').first()
+        request.session['project_shown_at'] = timezone.now().date().isoformat()
+    else:
+        new_card = Card.objects.filter(user=user, type__in=['habit', 'check', 'misc', 'book', 'article', 'learn'], due_at__lt=timezone.now(), occurrences__gt=0, is_active=True
+                                    ).order_by('?').first()
+
+
+
     
     # save new_card to session
     request.session['card'] = new_card.id

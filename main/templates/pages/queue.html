@@ -38,9 +38,13 @@
 
 
       <div class="m-t">
-
+        <!-- if Project -->
+        {% if card.human_readable_type == 'Project' %}
+        <h6>
+          Today, work on this:
+        </h6>
         <!-- if Article -->
-        {% if card.human_readable_type == 'Article' %}
+        {% elif card.human_readable_type == 'Article' %}
         <h6>
           Read this and make notes:
         </h6>
@@ -93,47 +97,30 @@
       <button type="submit"  name="not-today">Not Today</button>
       <button type="submit"  name="do-later">Do Later</button>
       <button type="submit"  name="done">Done</button>
-      {% endif %}
       <!-- if type check: No, Kind Of, Yes -->
-      {% if card.human_readable_type == 'Self Check-In'%}
+      {% elif card.human_readable_type == 'Self Check-In'%}
       <button type="submit"  name="no">No</button>
       <button type="submit"  name="kind-of">Kind Of</button>
       <button type="submit"  name="yes">Yes</button>
-      {% endif %}
       <!-- if type misc: "Show Next", "Cool, thanks!" -->
-      {% if card.human_readable_type == 'Miscellaneous'%}
+      {% elif card.human_readable_type == 'Miscellaneous'%}
       <button type="submit"  name="show-next">Show Next</button>
       <button type="submit"  name="cool-thanks">Cool, thanks!</button>
-      {% endif %}
-      {% if card.human_readable_type == 'Article'%}
+      {% elif card.human_readable_type == 'Article'%}
       <button type="submit"  name="not-today">Not Today</button>
       <button type="submit"  name="do-later">Do Later</button>
       <button type="submit"  name="made-some-progress">Made Some Progress</button>
       <button type="submit"  name="finished">Finished</button>
-      {% endif %}
       <!-- if book: "Not Today", "Done", "Finished Book" -->
-      {% if card.human_readable_type == 'Book'%}
+      {% elif card.human_readable_type == 'Book'%}
       <button type="submit"  name="not-today">Not Today</button>
       <button type="submit"  name="do-later">Do Later</button>
       <button type="submit"  name="done">Done</button>
       <button type="submit"  name="finished-book">Finished
         Book</button>
-      {% endif %}
+      {% elif card.human_readable_type == 'Project' %}
+      <button type="submit"  name="done">Ok, got it scheduled</button>
     </form>
-    {% endif %}
-
-    <!-- TODO: the UI is alright, but the backend data is fucked, so revive that once that's fixed -->
-    <!-- <div id="stats" >
-    {% for log in card.log_set.all %}
-    {% if log.score > 0 %}
-    <div >{{ log.score }} | {{ log.input_type }}</div>
-    {% elif log.score < 0 %}
-    <div >{{ log.score }} | {{ log.input_type }}</div>
-    {% else %}
-    <div >{{ log.score }} | {{ log.input_type }}</div>
-    {% endif %}
-    {% endfor %}
-  </div> -->
 
     {% else %}
 
@@ -143,5 +130,7 @@
     {% endif %}
   </div>
 </div>
+{% endif %}
+{% endif %}
 
 {% endblock content %}

@@ -23,12 +23,8 @@ CARD_TYPES = (
     ('Habit', 'habit'),
     ('Self Check-In', 'check'),
     ('Miscellaneous', 'misc'),
-    ('Miscellaneous', 'other'),
-    ('Miscellaneous', 'standard'),
     ('Book', 'book'),
-    ('Book', 'readingList'),
     ('Article', 'article'),
-    ('Article', 'articleList'),
     ('Learning', 'learn'),
     ('Project', 'project'),
 )
