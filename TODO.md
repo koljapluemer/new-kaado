@@ -6,6 +6,7 @@
 * rename the card types in Tuple of Card Edit form
 * allow basic connections
 * see that I'm only matched with my own cards!!
+* quick-new-card-flow (clone card or something?)
 
 ## SHOULD
 

@@ -6,6 +6,8 @@ from django.urls import reverse_lazy
 class TagListView(ListView):
     model = Tag
     template_name = 'tags/list.html'
+    def get_queryset(self):
+        return Tag.objects.filter(user=self.request.user)
 
 class TagCreateView(CreateView):
     model = Tag

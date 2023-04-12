@@ -6,6 +6,8 @@ from django.urls import reverse_lazy
 class CardListView(ListView):
     model = Card
     template_name = 'cards/list.html'
+    def get_queryset(self):
+        return Card.objects.filter(user=self.request.user)
 
 class CardCreateView(CreateView):
     model = Card
