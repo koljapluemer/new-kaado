@@ -117,6 +117,11 @@
       <button type="submit" name="no">No</button>
       <button type="submit" name="kind-of">Kind Of</button>
       <button type="submit" name="yes">Yes</button>
+      <!-- if type todo: "Not Today", "Do Later", "Done" -->
+      {% elif card.type == 'todo'%}
+      <button type="submit" name="not-today">Not Today</button>
+      <button type="submit" name="do-later">Do Later</button>
+      <button type="submit" name="done">Done</button>
       <!-- if type misc: "Show Next", "Cool, thanks!" -->
       {% elif card.type == 'misc'%}
       <button type="submit" name="show-next">Show Next</button>

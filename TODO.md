@@ -7,6 +7,9 @@
 * allow basic connections
 * see that I'm only matched with my own cards!!
 * quick-new-card-flow (clone card or something?)
+* implement prio
+* implement first show of learn cards
+* allow deactivating tags
 
 ## SHOULD
 
@@ -33,6 +36,9 @@
 * landing page/onboarding
 * allow filtering the queue to only fun stuff
 * make a bash alias for the really long Python requirements thing
+* test doing card edit w/ good old Vue?
+* build importer
+* hook up to RSS/blogging/Medium
 
 ## IDEAS
 
@@ -41,3 +47,4 @@
 ## BUGS
 
 * type of card does not seem to be preselected in dropdown?
+* sometimes "you're all catched up" shows with card? logic flow def fucked.
