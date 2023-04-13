@@ -99,6 +99,7 @@ def handle_review(request):
                 card.due_at = timezone.now() + timedelta(minutes=10)
             elif 'done' in request.POST:
                 review.review = 'done'
+                review.card = None
                 card.delete()
                 give_message_reward = True
         # Miscellaneous
