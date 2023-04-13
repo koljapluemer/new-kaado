@@ -8,7 +8,7 @@
 <div id="content" class="row" x-data="{ showBack: false }">
   <div class="two columns">
     <div class="tool border p m">
-      <a href="cards/{{ card.id }}/edit">
+      <a href="{% url 'card_edit' card.id %}" up-layer="new" up-accept-location="/">
         Edit Card
       </a>
     </div>

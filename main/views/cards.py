@@ -47,10 +47,10 @@ class CardUpdateView(UpdateView):
         context['tags'] = json.dumps({'tags': list(tags)})
         return context
 
-
     def form_valid(self, form):
-        form.instance = self.request.user
+        form.instance.user = self.request.user
         return super().form_valid(form)
+    
 
 class CardDeleteView(DeleteView):
     model = Card

@@ -1,8 +1,7 @@
 {% extends 'boilerplate/page.html' %}
 {% block content %}
 <div id="content">
-    <h2>New Card</h2>
-    <form action="" method="post">
+    <form method="post">
         {% csrf_token %}
         <div id="f-front">
             {{ form.front.label_tag }}
