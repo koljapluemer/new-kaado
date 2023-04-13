@@ -25,4 +25,6 @@ urlpatterns = [
     path('tags/<int:pk>/delete', TagDeleteView.as_view(), name='tag_delete'),
     # oAuth
     path('accounts/', include('allauth.urls')),
+    # unpoly tests
+    path('unpoly/cards/new', views.unpoly_cards_new, name='unpoly_cards_new'),
 ]

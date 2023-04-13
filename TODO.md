@@ -26,6 +26,7 @@
 * handle projects correctly
 * display card list, allow filtering and sorting
 * find out how env variables for pg variables are done properly, apparently `DATABASE_NAME` and stuff is bound to switch, yet I need it locally
+* set better card name in model
 
 ## COULD
 
@@ -39,6 +40,9 @@
 * test doing card edit w/ good old Vue?
 * build importer
 * hook up to RSS/blogging/Medium
+* weigh random selection of type so books is less often
+* bring back preview
+* visually improve tool bar
 
 ## IDEAS
 
