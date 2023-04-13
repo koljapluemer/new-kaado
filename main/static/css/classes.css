@@ -1,197 +1,212 @@
 .m {
-    margin: 16px;
+  margin: 16px;
 }
 
 .m-t {
-    margin-top: 16px;
+  margin-top: 16px;
 }
 
 .m-r {
-    margin-right: 16px;
+  margin-right: 16px;
 }
 
 .m-b {
-    margin-bottom: 16px;
+  margin-bottom: 16px;
 }
 
 .m-l {
-    margin-left: 16px;
+  margin-left: 16px;
 }
 
 .m-x {
-    margin-left: 16px;
-    margin-right: 16px;
+  margin-left: 16px;
+  margin-right: 16px;
 }
 
 .m-y {
-    margin-top: 16px;
-    margin-bottom: 16px;
+  margin-top: 16px;
+  margin-bottom: 16px;
 }
 
 .p {
-    padding: 16px;
+  padding: 16px;
 }
 
 .p-t {
-    padding-top: 16px;
+  padding-top: 16px;
 }
 
 .p-r {
-    padding-right: 16px;
+  padding-right: 16px;
 }
 
 .p-b {
-    padding-bottom: 16px;
+  padding-bottom: 16px;
 }
 
 .p-l {
-    padding-left: 16px;
+  padding-left: 16px;
 }
 
 .p-x {
-    padding-left: 16px;
-    padding-right: 16px;
+  padding-left: 16px;
+  padding-right: 16px;
 }
 
 .p-y {
-    padding-top: 16px;
-    padding-bottom: 16px;
+  padding-top: 16px;
+  padding-bottom: 16px;
 }
 
 .border {
-    border: 1px solid #e5e5e5;
+  border: 1px solid #e5e5e5;
 }
 
 .border-b {
-    border-bottom: 1px solid #e5e5e5;
+  border-bottom: 1px solid #e5e5e5;
 }
 
 .border-r {
-    border-right: 1px solid #e5e5e5;
+  border-right: 1px solid #e5e5e5;
+}
+
+.rounded {
+  border-radius: 12px;
+}
+
+.shadow-sm {
+  box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.1);
+}
+
+.shadow-md {
+  box-shadow: 0 0 6px rgba(0, 0, 0, 0.3);
+}
+
+.shadow-lg {
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.3);
 }
 
 .card {
-    border: 1px solid #e5e5e5;
-    padding: 16px;
-    border-radius: 6px;
-    overflow: auto;
+  border: 1px solid #e5e5e5;
+  padding: 16px;
+  border-radius: 6px;
+  overflow: auto;
 }
 
 .badge {
-    background: #e5e5e5;
-    padding: 6px;
-    border-radius: 6px;
-    font-size: 1rem;
-    display: inline-block;
-    margin: 6px 0;
+  background: #e5e5e5;
+  padding: 6px;
+  border-radius: 6px;
+  font-size: 1rem;
+  display: inline-block;
+  margin: 6px 0;
 }
 
 .around {
-    display: flex;
-    justify-content: space-around;  
+  display: flex;
+  justify-content: space-around;
 }
 
 .center {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 6px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
 }
 
 .justify-around {
-    justify-content: space-around;
+  justify-content: space-around;
 }
 
 .align-center {
-    align-items: center;
+  align-items: center;
 }
 
 .text-center {
-    text-align: center;
+  text-align: center;
 }
 
 .flex-col {
-    flex-direction: column;
+  flex-direction: column;
 }
 
 .flex {
-    display: flex;
+  display: flex;
 }
 
 blockquote {
-    border-left: 4px solid #e5e5e5;
-    padding: 0 16px;
-    margin: 16px 0;
+  border-left: 4px solid #e5e5e5;
+  padding: 0 16px;
+  margin: 16px 0;
 }
 
-
 .flex {
-    display: flex;
+  display: flex;
 }
 
 .grow {
-    flex-grow: 1;
+  flex-grow: 1;
 }
 
 .full-width {
-    width: 100%;
-    max-width: inherit;
+  width: 100%;
+  max-width: inherit;
 }
 
 .full-height {
-    height: 100%;
-    max-height: inherit;
+  height: 100%;
+  max-height: inherit;
 }
 
 /* COLORS */
 
 .red {
-    background: #ff0000;
+  background: #ff0000;
 }
 
 .yellow {
-    background: #e0e00f;
+  background: #e0e00f;
 }
 
 .green-light {
-    background: #00ff00;
+  background: #00ff00;
 }
 
 .green-dark {
-    background: #0f8b0f;
+  background: #0f8b0f;
 }
 
 .blue-lightest {
-    background: #e6f5ff;
+  background: #e6f5ff;
 }
 
 .blue-lighter {
-    background: #add8e6;
+  background: #add8e6;
 }
 
 .blue-light {
-    background: #87cefa;
+  background: #87cefa;
 }
 
 .blue {
-    background: #5d5deb;
+  background: #5d5deb;
 }
 
 .blue-dark {
-    background: #0000ff;
+  background: #0000ff;
 }
 
 .blue-darker {
-    background: #0000cd;
+  background: #0000cd;
 }
 
 .grey {
-    background: #e0e0e0;
+  background: #e0e0e0;
 }
 
 .btn-sm {
-    padding: 2px;
-    margin: 2px;
-    height: inherit;
-    line-height: inherit;
+  padding: 2px;
+  margin: 2px;
+  height: inherit;
+  line-height: inherit;
 }

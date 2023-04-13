@@ -17,8 +17,11 @@
             {{ form.type }}
         </div>
         <div id="f-tags">
+            {% for t in form.tags.initial %}
+            {{ t }}
+            {% endfor %}
             {{ form.tags.label_tag }}
-            {{ form.tags }}
+          {% include 'includes/tag_selector.html' %}
         </div>
 
         <div id="f-is_active">
