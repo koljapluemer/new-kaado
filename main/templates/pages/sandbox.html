@@ -1,0 +1,120 @@
+{% extends 'boilerplate/page.html' %}
+{% block content %}
+
+
+<div id="tags-container" class="p">
+    <div class="flex" id="tags-input-line">
+        <div id="inner-tags-container"></div>
+        <input id="tags-input" type="text" placeholder="Enter tags...">
+    </div>
+
+    <div id="tags-suggestions" class="border"></div>
+</div>
+
+
+<style>
+    #tags-suggestions {
+        position: absolute;
+        left: 0;
+        z-index: 1;
+        background-color: #fff;
+        border: 1px solid #ccc;
+    }
+
+    .tag-suggestion {
+        padding: 5px;
+        background-color: #fff;
+        border: 1px solid #ccc;
+        cursor: pointer;
+    }
+
+    .tag-suggestion:hover {
+        background-color: #f4f4f4;
+    }
+</style>
+
+
+<script>
+
+    const tagsInput = document.getElementById('tags-input');
+    const tagsContainer = document.getElementById('tags-container');
+    const innerTagsContainer = document.getElementById('inner-tags-container');
+    const tagsSuggestions = document.getElementById('tags-suggestions');
+    const defaultTags = ['art', 'photography', 'writing'];
+    let tags = [];
+
+    function updateSuggestions(inputText) {
+        const suggestions = defaultTags.filter((tag) => {
+            return tag.toLowerCase().startsWith(inputText) && !tags.includes(tag);
+        });
+        if (suggestions.length > 0) {
+            tagsSuggestions.innerHTML = '';
+            suggestions.forEach((tag) => {
+                const suggestionEl = document.createElement('div');
+                suggestionEl.classList.add('tag-suggestion');
+                suggestionEl.textContent = tag;
+                suggestionEl.addEventListener('click', () => {
+                    tags.push(tag);
+                    tagsInput.value = '';
+                    updateTags();
+                    tagsSuggestions.innerHTML = '';
+                    tagsSuggestions.style.display = 'none';
+                });
+                tagsSuggestions.appendChild(suggestionEl);
+            });
+            tagsSuggestions.style.display = 'block';
+            // move to beginning of input box
+            tagsSuggestions.style.left = tagsInput.offsetLeft + 'px';
+        } else {
+            tagsSuggestions.innerHTML = '';
+            tagsSuggestions.style.display = 'none';
+        }
+    }
+
+    tagsInput.addEventListener('input', (event) => {
+        const inputText = event.target.value.trim().toLowerCase();
+        updateSuggestions(inputText);
+    });
+
+    tagsInput.addEventListener('keydown', (event) => {
+        if (event.key === 'Enter' || event.key === ',') {
+            event.preventDefault();
+            const tag = tagsInput.value.trim();
+            if (tag) {
+                tags.push(tag);
+                updateTags();
+            }
+        }
+    });
+
+    document.addEventListener('click', (event) => {
+        if (!tagsSuggestions.contains(event.target)) {
+            tagsSuggestions.style.display = 'none';
+        }
+    });
+
+    function updateTags() {
+        // clear tags container
+        innerTagsContainer.innerHTML = '';
+        tags.forEach((tag) => {
+            // check if tag with same textContent already exists
+            const tagEl = document.createElement('span');
+            tagEl.textContent = tag;
+            const deleteButton = document.createElement('button');
+            deleteButton.textContent = 'x';
+            deleteButton.classList.add('btn-sm');
+            deleteButton.addEventListener('click', () => {
+                tags = tags.filter((t) => t !== tag);
+                updateTags();
+            });
+            tagEl.appendChild(deleteButton);
+            innerTagsContainer.appendChild(tagEl);
+        });
+        tagsInput.value = '';
+        tagsInput.focus();
+    }
+
+
+</script>
+
+{% endblock content %}

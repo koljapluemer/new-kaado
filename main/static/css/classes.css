@@ -189,4 +189,9 @@ blockquote {
     background: #e0e0e0;
 }
 
-
+.btn-sm {
+    padding: 2px;
+    margin: 2px;
+    height: inherit;
+    line-height: inherit;
+}

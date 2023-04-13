@@ -7,3 +7,6 @@ def index(request):
 
 def login(request):
     return render(request, 'pages/login.html')
+
+def sandbox(request):
+    return render(request, 'pages/sandbox.html')

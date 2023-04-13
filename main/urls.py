@@ -27,4 +27,6 @@ urlpatterns = [
     path('accounts/', include('allauth.urls')),
     # unpoly tests
     path('unpoly/cards/new', views.unpoly_cards_new, name='unpoly_cards_new'),
+    # more tests
+    path('sandbox', views.sandbox, name='sandbox'),
 ]

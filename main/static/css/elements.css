@@ -58,3 +58,17 @@
 #id_front {
   min-height: 350px;
 }
+
+#inner-tags-container {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+#tags-input-line {
+  align-items: center;
+}
+
+#tags-input-line input {
+  margin-bottom: 0;
+}
