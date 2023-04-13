@@ -4,9 +4,61 @@
     <h2>New Card</h2>
     <form action="" method="post">
         {% csrf_token %}
-        {{ form }}
+        <div id="f-front">
+            {{ form.front.label_tag }}
+            {{ form.front }}
+        </div>
+        <div id="f-back">
+            {{ form.back.label_tag }}
+            {{ form.back }}
+        </div>
+        <div id="f-type">
+            {{ form.type.label_tag }}
+            {{ form.type }}
+        </div>
+        <div id="f-tags">
+            {{ form.tags.label_tag }}
+            {{ form.tags }}
+        </div>
+
+        <div id="f-is_active">
+            {{ form.is_active.label_tag }}
+            {{ form.is_active }}
+        </div>
+        <div id="f-is_priority">
+            {{ form.is_priority.label_tag }}
+            {{ form.is_priority }}
+        </div>
+        <div id="f-is_started">
+            {{ form.is_started.label_tag }}
+            {{ form.is_started }}
+        </div>
+        <div id="f-interval">
+            {{ form.interval.label_tag }}
+            {{ form.interval }}
+            {{ form.interval_unit }}
+        </div>
         <input type="submit" value="Submit">
     </form>
 </div>
+
+<script>
+    // function to toggle #f-back if type is not learn
+    function toggleBack() {
+        console.log('toggleBack');
+        var type = document.getElementById('id_type');
+        var back = document.getElementById('f-back');
+        if (type.value == 'learn') {
+            back.style.display = 'block';
+        } else {
+            back.style.display = 'none';
+        }
+    }
+    // call toggleBack on page load
+    toggleBack();
+    // call toggleBack on type change
+    document.getElementById('id_type').addEventListener('change', toggleBack);
+    console.log('loaded');
+</script>
 
 {% endblock content %}
