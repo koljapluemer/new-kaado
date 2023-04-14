@@ -3,39 +3,7 @@
 <div id="content">
     <form method="post">
         {% csrf_token %}
-        <div id="f_front">
-            {{ form.front.label_tag }}
-            {{ form.front }}
-        </div>
-        <div id="f_back">
-            {{ form.back.label_tag }}
-            {{ form.back }}
-        </div>
-        <div id="f_type">
-            {{ form.type.label_tag }}
-            {{ form.type }}
-        </div>
-        <div id="f_tags">
-            {{ form.tags.label_tag }}
-            {{ form.tags }}
-        </div>
-        <div id="f_is_active">
-            {{ form.is_active.label_tag }}
-            {{ form.is_active }}
-        </div>
-        <div id="f_is_priority">
-            {{ form.is_priority.label_tag }}
-            {{ form.is_priority }}
-        </div>
-        <div id="f_is_started">
-            {{ form.is_started.label_tag }}
-            {{ form.is_started }}
-        </div>
-        <div id="f_interval">
-            {{ form.interval.label_tag }}
-            {{ form.interval }}
-            {{ form.interval_unit }}
-        </div>
+       {{ form.as_p }}
         <input type="submit" value="Submit">
     </form>
 </div>
@@ -43,7 +11,7 @@
 <script>
     // Get references to the relevant elements
     var typeField = document.getElementById("id_type");
-    var backSection = document.getElementById("f_back");
+    var backSection = document.getElementById("id_back").parentNode;
 
     // Set the initial visibility of the back field
     if (typeField.value !== "learn") {
