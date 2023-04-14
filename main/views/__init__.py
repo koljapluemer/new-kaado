@@ -4,3 +4,4 @@ from .pages import *
 from .auth import *
 from .tags import *
 from .unpoly import *
+from .rest import *

@@ -56,6 +56,7 @@ django==4.2
     #   django-allauth
     #   django-extensions
     #   django-heroku
+    #   djangorestframework
 django-allauth==0.54.0
     # via -r requirements.in
 django-environ==0.10.0
@@ -63,6 +64,8 @@ django-environ==0.10.0
 django-extensions==3.2.1
     # via -r requirements.in
 django-heroku==0.3.1
+    # via -r requirements.in
+djangorestframework==3.14.0
     # via -r requirements.in
 docutils==0.19
     # via readme-renderer
@@ -116,7 +119,7 @@ jeepney==0.8.0
     # via
     #   keyring
     #   secretstorage
-jupyter-client==8.1.0
+jupyter-client==8.2.0
     # via ipykernel
 jupyter-core==5.3.0
     # via
@@ -138,7 +141,7 @@ nest-asyncio==1.5.6
     # via ipykernel
 oauthlib==3.2.2
     # via requests-oauthlib
-packaging==23.0
+packaging==23.1
     # via
     #   deprecation
     #   ipykernel
@@ -190,6 +193,8 @@ python-semantic-release==7.33.2
     # via supabase
 python3-openid==3.2.0
     # via django-allauth
+pytz==2023.3
+    # via djangorestframework
 pyzmq==25.0.2
     # via
     #   ipykernel

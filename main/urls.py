@@ -29,4 +29,8 @@ urlpatterns = [
     path('unpoly/cards/new', views.unpoly_cards_new, name='unpoly_cards_new'),
     # more tests
     path('sandbox', views.sandbox, name='sandbox'),
+    # REST
+    path('api/card', views.APICardList.as_view()),
+    path('api/card/<int:pk>', views.APICardRetrieveUpdateDestroy.as_view()),
+    path('api/card/random/<int:user_id>', views.APICardRandom.as_view()),
 ]

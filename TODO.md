@@ -50,5 +50,4 @@
 
 ## BUGS
 
-* type of card does not seem to be preselected in dropdown?
-* sometimes "you're all catched up" shows with card? logic flow def fucked.
+* marking card as `done` for todos does not delete them?!
