@@ -25,7 +25,6 @@ class CardCreateView(CreateView):
         tags = Tag.objects.filter(user=self.request.user).values_list('name', flat=True)
         # serialize python list
         context['tags'] = json.dumps({'tags': list(tags)})
-        return context
 
     def form_valid(self, form):
         form.instance.user = self.request.user
@@ -45,6 +44,8 @@ class CardUpdateView(UpdateView):
         tags = Tag.objects.filter(user=self.request.user).values_list('name', flat=True)
         # serialize python list
         context['tags'] = json.dumps({'tags': list(tags)})
+        print('PASSING: ', self.object)
+        context['state'] = serializers.serialize('json', [self.object])
         return context
 
     def form_valid(self, form):

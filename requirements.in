@@ -12,3 +12,5 @@ supabase
 ipywidgets
 whitenoise
 djangorestframework
+django-rest-auth
+django-cors-headers

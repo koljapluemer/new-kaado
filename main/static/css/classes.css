@@ -210,3 +210,7 @@ blockquote {
   height: inherit;
   line-height: inherit;
 }
+
+.hidden {
+  display: none;
+}

@@ -10,3 +10,6 @@ def login(request):
 
 def sandbox(request):
     return render(request, 'pages/sandbox.html')
+
+def alpine(request):
+    return render(request, 'pages/alpine.html')
