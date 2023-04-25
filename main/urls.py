@@ -36,4 +36,6 @@ urlpatterns = [
     path('api/card/random/<int:user_id>', views.APICardRandom.as_view()),
     # django-rest-auth
     path('api/auth/', include('rest_framework.urls')),
+
+    path('export', export_cards_as_csv, name='export_cards_as_csv'),
 ]

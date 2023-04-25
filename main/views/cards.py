@@ -4,6 +4,8 @@ from ..models import Card, Tag
 from django.core import serializers
 from django.urls import reverse_lazy
 import json
+import csv
+from django.http import HttpResponse
 
 class CardListView(ListView):
     model = Card
@@ -57,3 +59,14 @@ class CardDeleteView(DeleteView):
     model = Card
     success_url = reverse_lazy('queue')
     template_name = 'cards/confirm_delete.html'
+
+def export_cards_as_csv(request):
+    response = HttpResponse(content_type='text/csv')
+    response['Content-Disposition'] = 'attachment; filename="cards.csv"'
+    writer = csv.writer(response, quoting=csv.QUOTE_ALL)
+    writer.writerow(['front', 'back', 'type', 'tags', 'is_active', 'is_priority', 'is_started',  'interval', 'interval_unit'])
+    cards = Card.objects.filter(user=request.user)
+    for card in cards:
+        tags = ' '.join([tag.name for tag in card.tags.all()])
+        writer.writerow([card.front, card.back, card.type, tags, card.is_active, card.is_priority, card.is_started, card.interval, card.interval_unit])
+    return response
